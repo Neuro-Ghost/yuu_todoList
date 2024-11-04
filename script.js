@@ -332,9 +332,12 @@ document.addEventListener("DOMContentLoaded", function () {
         if (audio.paused) {
             audio.play();
             playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
+            playButton.classList.add("playing"); // Add the gradient animation class
         } else {
             audio.pause();
             playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            playButton.classList.remove("playing"); // Add the gradient animation class
+
         }
     });
 
