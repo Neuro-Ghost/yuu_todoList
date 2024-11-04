@@ -282,6 +282,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const timeDisplay = document.getElementById('time-display');
     const currentSongDisplay = document.getElementById('current-song');
     const progressContainer = document.getElementById("progress-container");
+    const musicPlayer = document.getElementById("music-player");
 
     const playlist = [
         { name: "enta zaalan menni", path: "enta zaalan menni.mp3" },
@@ -332,11 +333,11 @@ document.addEventListener("DOMContentLoaded", function () {
         if (audio.paused) {
             audio.play();
             playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
-            playButton.classList.add("playing"); // Add the gradient animation class
+            musicPlayer.classList.add("playing"); // Add the gradient animation class
         } else {
             audio.pause();
             playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-            playButton.classList.remove("playing"); // Add the gradient animation class
+            musicPlayer.classList.remove("playing"); // Add the gradient animation class
 
         }
     });
