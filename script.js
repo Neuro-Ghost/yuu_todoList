@@ -278,6 +278,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const audio = document.getElementById('audio');
     const playPauseBtn = document.getElementById('play-pause-btn');
     const nextBtn = document.getElementById('next-btn');
+    const backBtn = document.getElementById('back-btn'); // Reference to back button
     const progressBar = document.getElementById('progress-bar');
     const timeDisplay = document.getElementById('time-display');
     const currentSongDisplay = document.getElementById('current-song');
@@ -296,7 +297,6 @@ document.addEventListener("DOMContentLoaded", function () {
         { name: "Soft Spot", path: "Soft Spot (Acoustic).mp3" },
         { name: "Devil's Daughter", path: "noname.mp3" },
         { name: "Cupid (not atoxy's)", path: "Cupid' (TwinVer.).mp3" },
-
     ];
 
     let currentTrackIndex = 0;
@@ -304,7 +304,6 @@ document.addEventListener("DOMContentLoaded", function () {
     audio.src = playlist[currentTrackIndex].path;
     currentSongDisplay.textContent = playlist[currentTrackIndex].name;
 
-    // Function to play the current track
     function playTrack() {
         if (audio.src !== playlist[currentTrackIndex].path) {
             audio.src = playlist[currentTrackIndex].path;
@@ -315,12 +314,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }
 
-    // Function to update the progress bar
     function updateProgressBar() {
         const progress = (audio.currentTime / audio.duration) * 100 || 0;
         progressBar.style.width = progress + '%';
 
-        // Update time display
         const currentMinutes = Math.floor(audio.currentTime / 60);
         const currentSeconds = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
         const durationMinutes = Math.floor(audio.duration / 60);
@@ -328,8 +325,7 @@ document.addEventListener("DOMContentLoaded", function () {
         timeDisplay.textContent = `${currentMinutes}:${currentSeconds} / ${durationMinutes}:${durationSeconds}`;
     }
 
-    // Event listener for play/pause button
-    playPauseBtn.addEventListener('click', () => {
+playPauseBtn.addEventListener('click', () => {
         if (audio.paused) {
             audio.play();
             playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
@@ -342,39 +338,48 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Event listener for next button
     nextBtn.addEventListener("click", function () {
-        currentTrackIndex = (currentTrackIndex + 1) % playlist.length; 
-        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
+        currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
         playTrack();
     });
 
-    // Event listener for loop button
+    // Back button functionality
+    backBtn.addEventListener("click", function () {
+        if (audio.currentTime > 5) {
+            // If more than 5 seconds into the song, restart the song
+            audio.currentTime = 0;
+        } else {
+            // Otherwise, go to the previous track
+            currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            playTrack();
+        }
+    });
+
     loopBtn.addEventListener("click", () => {
         isLooping = !isLooping;
         loopBtn.style.color = isLooping ? "#e8d0a9" : "white";
     });
 
-    // Event listener for when the track ends
     audio.addEventListener("ended", function () {
         if (!isLooping) {
-            currentTrackIndex = (currentTrackIndex + 1) % playlist.length; 
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
             playTrack();
         } else {
-            audio.play(); 
+            audio.play();
         }
     });
 
-    // Event listener to update the progress bar as the audio plays
     audio.addEventListener('timeupdate', updateProgressBar);
 
-    // Event listener for clicking the progress bar to seek
     progressContainer.addEventListener("click", function (event) {
-        const totalWidth = this.clientWidth; // Get the total width of the progress container
-        const offsetX = event.offsetX; // Get the X position of the click
-        const percentage = offsetX / totalWidth; // Calculate the percentage of the click position
-        const newTime = percentage * audio.duration; // Calculate the new time in seconds
-        audio.currentTime = newTime; // Update the audio currentTime
+        const totalWidth = this.clientWidth;
+        const offsetX = event.offsetX;
+        const percentage = offsetX / totalWidth;
+        const newTime = percentage * audio.duration;
+        audio.currentTime = newTime;
     });
 });
+
 
