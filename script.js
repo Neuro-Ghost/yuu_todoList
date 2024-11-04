@@ -327,7 +327,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Event listener for play/pause button
     playPauseBtn.addEventListener('click', () => {
         if (audio.paused) {
-            playTrack();
+            audio.play();
             playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
         } else {
             audio.pause();
