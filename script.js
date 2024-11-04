@@ -27,8 +27,10 @@ muteBtn.addEventListener("click", () => {
 
 
     const messages = [
-        "G fucking G's",
-        "Everyone's good at something..."
+        "Another day, another L.",
+        "Everyone's good at something...",
+        "Hop on reload?",
+        "Keep at it.",        
     ];
 
     const initialCatImages = [
