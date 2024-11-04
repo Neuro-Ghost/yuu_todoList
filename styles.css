@@ -626,6 +626,7 @@ body {
   width: 0; /* Initial width */
   transition: width 0.1s ease; /* Smooth width transition */
   border-radius: 5px; /* Match corners with the container */
+  cursor: pointer;
 }
 
 /* Optional: Add styles for the current time and duration */
