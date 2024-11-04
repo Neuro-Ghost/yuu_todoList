@@ -313,6 +313,10 @@ document.addEventListener("DOMContentLoaded", function () {
             name: "Soft Spot",
             path: "Soft Spot (Acoustic).mp3"
         },
+           {
+            name: "Devil's Daughter",
+            path: "Devil's Daughter.mp3"
+        },
         // You can add more songs here as needed
     ];
 
