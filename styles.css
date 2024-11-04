@@ -557,19 +557,34 @@ body {
   margin: 20px auto; /* Center the player on the page */
   background: linear-gradient(120deg, #5c3d2e, #d9c5b2);
   color: #fff; /* White text for contrast */
-   background-size: 400% 400%;
-    transition: background 0.3s ease;
+  background-size: 400% 400%;
+  transition: background 0.3s ease;
 }
+
 .playing {
-    animation: gradientAnimation 6s ease infinite;
+  animation: gradientAnimation 8s ease infinite; /* Increase duration for smoother transitions */
 }
 
 @keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  20% {
+    background-position: 25% 50%;
+  }
+  40% {
+    background-position: 50% 50%;
+  }
+  60% {
+    background-position: 75% 50%;
+  }
+  80% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
-
 
 #music-player h2 {
   font-family: 'Quicksand', sans-serif;; /* Title font */
