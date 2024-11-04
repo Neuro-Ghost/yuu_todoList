@@ -286,6 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const playlist = [
         { name: "enta zaalan menni", path: "enta zaalan menni.mp3" },
         { name: "dream", path: "dream.mp3" },
+        { name: "everything, everywhere", path: "everything, everywhere.mp3" },
         { name: "by my side", path: "by my side.mp3" },
         { name: "YOURS", path: "YOURS.mp3" },
         { name: "IF ITS NOT YOU", path: "IF ITS NOT YOU.mp3" },
