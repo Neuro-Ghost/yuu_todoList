@@ -276,75 +276,41 @@ muteBtn.addEventListener("click", () => {
 document.addEventListener("DOMContentLoaded", function () {
     const loopBtn = document.getElementById("loop-btn");
     const audio = document.getElementById('audio');
-    const playPauseBtn = document.getElementById('play-pause-btn'); // Combine play and pause into one button
+    const playPauseBtn = document.getElementById('play-pause-btn');
     const nextBtn = document.getElementById('next-btn');
     const progressBar = document.getElementById('progress-bar');
     const timeDisplay = document.getElementById('time-display');
     const currentSongDisplay = document.getElementById('current-song');
+    const musicPlayer = document.getElementById('music-player');
 
     const playlist = [
-        {
-            name: "enta zaalan menni",
-            path: "enta zaalan menni.mp3"
-        },
-        {
-            name: "dream",
-            path: "dream.mp3"
-        },
-        {
-            name: "by my side",
-            path: "by my side.mp3"
-        },
-        {
-            name: "YOURS",
-            path: "YOURS.mp3"
-        },
-        {
-            name: "IF ITS NOT YOU",
-            path: "IF ITS NOT YOU.mp3"
-        },
-        {
-            name: "Jalil",
-            path: "Jalil.mp3"
-        },
-        {
-            name: "Inazuma Sorrow",
-            path: "Inazuma Sorrow.mp3"
-        },
-         {
-            name: "Soft Spot",
-            path: "Soft Spot (Acoustic).mp3"
-        },
-           {
-            name: "Devil's Daughter",
-            path: "noname.mp3"
-        },
+        { name: "enta zaalan menni", path: "enta zaalan menni.mp3" },
+        { name: "dream", path: "dream.mp3" },
+        { name: "by my side", path: "by my side.mp3" },
+        { name: "YOURS", path: "YOURS.mp3" },
+        { name: "IF ITS NOT YOU", path: "IF ITS NOT YOU.mp3" },
+        { name: "Jalil", path: "Jalil.mp3" },
+        { name: "Inazuma Sorrow", path: "Inazuma Sorrow.mp3" },
+        { name: "Soft Spot", path: "Soft Spot (Acoustic).mp3" },
+        { name: "Devil's Daughter", path: "noname.mp3" },
     ];
 
     let currentTrackIndex = 0;
     let isLooping = false;
-    audio.src = playlist[currentTrackIndex].path; // Update the audio source only when switching tracks
-    currentSongDisplay.textContent = playlist[currentTrackIndex].name; // Update song name display
+    audio.src = playlist[currentTrackIndex].path;
+    currentSongDisplay.textContent = playlist[currentTrackIndex].name;
 
-
-    // Function to play the current track
-      // Function to play the current track
-      function playTrack() {
-        if (audio.src !== playlist[currentTrackIndex].path) {
-            audio.src = playlist[currentTrackIndex].path; // Update the audio source only when switching tracks
-            audio.play(); // Play the new track immediately
-            currentSongDisplay.textContent = playlist[currentTrackIndex].name; // Update song name display
-        } else {
-            audio.play(); // Just play if the same track is selected
-        }
+    function playTrack() {
+        audio.src = playlist[currentTrackIndex].path;
+        audio.play();
+        currentSongDisplay.textContent = playlist[currentTrackIndex].name;
+        musicPlayer.classList.add("playing"); // Add animation when playing
     }
 
-    // Function to update the progress bar
     function updateProgressBar() {
-        const progress = (audio.currentTime / audio.duration) * 100 || 0; // Avoid division by zero
+        const progress = (audio.currentTime / audio.duration) * 100 || 0;
         progressBar.style.width = progress + '%';
 
-        // Update time display
         const currentMinutes = Math.floor(audio.currentTime / 60);
         const currentSeconds = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
         const durationMinutes = Math.floor(audio.duration / 60);
@@ -352,56 +318,38 @@ document.addEventListener("DOMContentLoaded", function () {
         timeDisplay.textContent = `${currentMinutes}:${currentSeconds} / ${durationMinutes}:${durationSeconds}`;
     }
 
-    // Event listener for play/pause button
-    // Event listener for play/pause button
-    
     playPauseBtn.addEventListener('click', () => {
         if (audio.paused) {
-            // Check if the track needs to be loaded again
-            if (audio.src !== playlist[currentTrackIndex].path) {
-                audio.play(); // Resume the current track
-            }
-            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; // Change icon to pause
+            audio.play();
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            musicPlayer.classList.add("playing"); // Start animation
         } else {
-            audio.pause(); // Pause the track
-            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>'; // Change icon to play
+            audio.pause();
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            musicPlayer.classList.remove("playing"); // Stop animation
         }
     });
 
-    // Event listener for next button
     nextBtn.addEventListener("click", function () {
-        currentTrackIndex = (currentTrackIndex + 1) % playlist.length; // Cycle through the playlist
-        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; // Change icon to pause
-
+        currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
         playTrack();
     });
 
-    // Event listener for loop button
-    // Event listener for loop button
     loopBtn.addEventListener("click", () => {
-    isLooping = !isLooping; // Toggle the looping state
+        isLooping = !isLooping;
+        loopBtn.style.color = isLooping ? "#e8d0a9" : "white";
+    });
 
-    if (isLooping) {
-        loopBtn.style.color = "#e8d0a9"; // Set color to white when not looping
-    } else {
-        loopBtn.style.color = "white"; // Set color to white when not looping
-        loopBtn.innerHTML = '<i class="fas fa-redo"></i>'; // Change icon to pause
-    }
-});
-
-
-    // Event listener for when the track ends
     audio.addEventListener("ended", function () {
         if (!isLooping) {
-            currentTrackIndex = (currentTrackIndex + 1) % playlist.length; // Cycle to the next track
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
             playTrack();
-        }
-        else{
-            audio.play(); // Play the current track again if looping is enabled
+        } else {
+            audio.play();
         }
     });
 
-    // Event listener to update the progress bar as the audio plays
     audio.addEventListener('timeupdate', updateProgressBar);
 });
 
