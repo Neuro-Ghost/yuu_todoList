@@ -435,7 +435,7 @@ body {
     position: absolute;
     bottom: 10px;
     font-family: 'Quicksand', sans-serif; /* Use Quicksand for body text */    
-    color: #e8d0a9; /* matching the purple cat color */
+    color: #fff; 
     font-size: 14px;
     z-index: 3;
   }
