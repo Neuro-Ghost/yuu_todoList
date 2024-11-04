@@ -309,6 +309,10 @@ document.addEventListener("DOMContentLoaded", function () {
             name: "Inazuma Sorrow",
             path: "Inazuma Sorrow.mp3"
         },
+         {
+            name: "Soft Spot",
+            path: "Soft Spot (Acoustic).mp3"
+        },
         // You can add more songs here as needed
     ];
 
