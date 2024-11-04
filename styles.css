@@ -617,6 +617,7 @@ body {
   border-radius: 5px; /* Rounded corners */
   height: 8px; /* Height of the progress bar */
   margin: 15px 0; /* Spacing above and below */
+    cursor: pointer;
   overflow: hidden; /* Prevent overflow */
 }
 
