@@ -555,10 +555,10 @@ body {
   text-align: center; /* Center text and buttons */
   max-width: 400px; /* Limit width for better aesthetics */
   margin: 20px auto; /* Center the player on the page */
-  background: linear-gradient(120deg, #4A2C2A, #e4d3c3, #a8412d, #5c3d2e, #ff8c42);
-  color: #ffffff; /* White text for contrast */
-   animation: gradientAnimation 12s ease infinite; /* Adjust duration for a smoother transition */
-    transition: background 0.5s ease; /* Smooth transition for background change */
+  background: linear-gradient(120deg, #5c3d2e, #ff8c42);
+  color: #fff; /* White text for contrast */
+  animation: gradientAnimation 12s ease infinite; /* Adjust duration for a smoother transition */
+  transition: background 0.5s ease; /* Smooth transition for background change */
 }
 
 #music-player h2 {
