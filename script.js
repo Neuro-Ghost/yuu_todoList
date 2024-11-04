@@ -281,7 +281,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const progressBar = document.getElementById('progress-bar');
     const timeDisplay = document.getElementById('time-display');
     const currentSongDisplay = document.getElementById('current-song');
-    const musicPlayer = document.getElementById('music-player');
+    const progressContainer = document.getElementById("progress-container");
 
     const playlist = [
         { name: "enta zaalan menni", path: "enta zaalan menni.mp3" },
@@ -300,17 +300,23 @@ document.addEventListener("DOMContentLoaded", function () {
     audio.src = playlist[currentTrackIndex].path;
     currentSongDisplay.textContent = playlist[currentTrackIndex].name;
 
+    // Function to play the current track
     function playTrack() {
-        audio.src = playlist[currentTrackIndex].path;
-        audio.play();
-        currentSongDisplay.textContent = playlist[currentTrackIndex].name;
-        musicPlayer.classList.add("playing"); // Add animation when playing
+        if (audio.src !== playlist[currentTrackIndex].path) {
+            audio.src = playlist[currentTrackIndex].path;
+            audio.play();
+            currentSongDisplay.textContent = playlist[currentTrackIndex].name;
+        } else {
+            audio.play();
+        }
     }
 
+    // Function to update the progress bar
     function updateProgressBar() {
         const progress = (audio.currentTime / audio.duration) * 100 || 0;
         progressBar.style.width = progress + '%';
 
+        // Update time display
         const currentMinutes = Math.floor(audio.currentTime / 60);
         const currentSeconds = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
         const durationMinutes = Math.floor(audio.duration / 60);
@@ -318,43 +324,50 @@ document.addEventListener("DOMContentLoaded", function () {
         timeDisplay.textContent = `${currentMinutes}:${currentSeconds} / ${durationMinutes}:${durationSeconds}`;
     }
 
+    // Event listener for play/pause button
     playPauseBtn.addEventListener('click', () => {
         if (audio.paused) {
-            audio.play();
-            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            musicPlayer.classList.add("playing"); // Start animation
+            playTrack();
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
         } else {
             audio.pause();
             playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-            musicPlayer.classList.remove("playing"); // Stop animation
         }
     });
 
+    // Event listener for next button
     nextBtn.addEventListener("click", function () {
-        currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        currentTrackIndex = (currentTrackIndex + 1) % playlist.length; 
+        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
         playTrack();
     });
 
+    // Event listener for loop button
     loopBtn.addEventListener("click", () => {
         isLooping = !isLooping;
         loopBtn.style.color = isLooping ? "#e8d0a9" : "white";
     });
 
+    // Event listener for when the track ends
     audio.addEventListener("ended", function () {
         if (!isLooping) {
-            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length; 
             playTrack();
         } else {
-            audio.play();
+            audio.play(); 
         }
     });
 
-
-// Ensure you define this before adding the event listener above
-const progressContainer = document.getElementById("progress-container");
-
-
+    // Event listener to update the progress bar as the audio plays
     audio.addEventListener('timeupdate', updateProgressBar);
+
+    // Event listener for clicking the progress bar to seek
+    progressContainer.addEventListener("click", function (event) {
+        const totalWidth = this.clientWidth; // Get the total width of the progress container
+        const offsetX = event.offsetX; // Get the X position of the click
+        const percentage = offsetX / totalWidth; // Calculate the percentage of the click position
+        const newTime = percentage * audio.duration; // Calculate the new time in seconds
+        audio.currentTime = newTime; // Update the audio currentTime
+    });
 });
 
