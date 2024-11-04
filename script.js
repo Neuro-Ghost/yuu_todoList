@@ -349,6 +349,18 @@ document.addEventListener("DOMContentLoaded", function () {
             audio.play();
         }
     });
+    // Function to update the progress bar when clicked
+progressContainer.addEventListener("click", function (event) {
+    const totalWidth = this.clientWidth; // Get the total width of the progress container
+    const offsetX = event.offsetX; // Get the X position of the click
+    const percentage = offsetX / totalWidth; // Calculate the percentage of the click position
+    const newTime = percentage * audio.duration; // Calculate the new time in seconds
+    audio.currentTime = newTime; // Update the audio currentTime
+});
+
+// Ensure you define this before adding the event listener above
+const progressContainer = document.getElementById("progress-container");
+
 
     audio.addEventListener('timeupdate', updateProgressBar);
 });
