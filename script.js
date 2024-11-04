@@ -318,16 +318,17 @@ document.addEventListener("DOMContentLoaded", function () {
         timeDisplay.textContent = `${currentMinutes}:${currentSeconds} / ${durationMinutes}:${durationSeconds}`;
     }
 
-// Inside your play/pause button event listener
-playPauseBtn.addEventListener('click', () => {
-    if (audio.paused) {
-        audio.play();
-        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; // Change icon to pause
-    } else {
-        audio.pause();
-        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>'; // Change icon to play
-    }
-});
+    playPauseBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            musicPlayer.classList.add("playing"); // Start animation
+        } else {
+            audio.pause();
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            musicPlayer.classList.remove("playing"); // Stop animation
+        }
+    });
 
     nextBtn.addEventListener("click", function () {
         currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
