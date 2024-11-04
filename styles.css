@@ -549,13 +549,15 @@ body {
 }
 
 #music-player {
-  background-color: #4A2C2A; /* Dark background for the player */
   border-radius: 8px;
   padding: 20px; /* Padding for spacing */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
   text-align: center; /* Center text and buttons */
   max-width: 400px; /* Limit width for better aesthetics */
   margin: 20px auto; /* Center the player on the page */
+  background: linear-gradient(120deg, #ff7eb9, #ff65a3, #7afcff, #feff9c, #fff740);
+  background-size: 400% 400%;
+  transition: background 0.3s ease;
   color: #ffffff; /* White text for contrast */
 }
 
@@ -607,5 +609,16 @@ body {
   font-size: 14px; /* Font size for time display */
   margin-top: 5px; /* Spacing above the time display */
   color: #ccc; /* Light color for the time */
+}
+
+
+.playing {
+    animation: gradientAnimation 6s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
