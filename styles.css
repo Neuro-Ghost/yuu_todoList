@@ -1,0 +1,609 @@
+body {
+  background: linear-gradient(to bottom, #D3874D, #F2D7B5); /* Autumn-inspired gradient */
+  background-repeat: no-repeat; 
+  background-attachment: fixed; 
+  background-size: cover; 
+  font-family: 'Quicksand', sans-serif;
+  color: #4B2E2C; /* Warm brown for text */
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  min-height: 100vh; 
+}
+
+/* Container Styles */
+.container {
+  position: relative;
+  z-index: 1;
+  margin-top: 50px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: rgba(255, 243, 224, 0.9); /* Light beige */
+  padding: 20px;
+  border-radius: 10px;
+  width: 50%;
+  top: 20%;
+}
+
+/* Title Styles */
+.title {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 20px;
+  font-family: 'Dancing Script', cursive;
+  color: #4A2C2A; 
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
+  cursor: pointer; 
+  transition: color 0.3s, transform 0.4s;
+}
+.title:hover {
+  transform: scale(1.50);
+}
+
+/* Task Form Styles */
+.task-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.task-input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #B66A32; /* Warm brown */
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.add-task-btn {
+  background-color: #4A2C2A; 
+  color: #e8d0a9;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.add-task-btn:hover {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+      transform: scale(1);
+  }
+  50% {
+      transform: scale(1.1);
+  }
+  100% {
+      transform: scale(1);
+  }
+}
+
+/* Task List Styles */
+.task-list {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 10px;
+  background-color: #F2D7B5; /* Soft cream background */
+  border-radius: 5px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.delete-btn {
+  background-color: #A1392E; /* Deep red */
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.delete-btn:hover {
+  background-color: #872D24; /* Darker red */
+}
+
+/* Expected Completion Styles */
+.expected-completion {
+  flex-grow: 1; 
+  margin-right: 10px; 
+  padding: 5px;
+  border: 1px solid #B66A32;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Completed Button Styles */
+.complete-btn {
+  background-color: #D3874D;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.complete-btn:hover {
+  background-color: #B66A32;
+}
+
+/* Clear All Button Styles */
+.clear-all-btn {
+  display: none;
+  background-color: #A1392E;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.clear-all-btn:hover {
+  background-color: #872D24;
+}
+
+p {
+  color: #4B2E2C;
+  font-size: 13px;
+  margin-top: 20px;
+}
+
+/* Style for the priority dropdown */
+.priority-select {
+  margin-left: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  border: 1px solid #B66A32;
+  background-color: #fff;
+}
+
+/* Smooth task addition */
+.task-list li {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.task-list li.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Task completion animation */
+.completed {
+  background-color: #C48E7D; /* Muted brown-pink */
+  border: 2px solid #ffffff;
+  padding: 10px;
+  border-radius: 8px;
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .main {
+    height: 400px;
+    width: 400px;
+    position: relative;
+    position: absolute;
+    bottom: 75%;
+    z-index: 1;
+  }
+  
+  .stand {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    height: 20px;
+    width: 200px;
+    border-radius: 20px;
+    background-color: #4A2C2A; /* muted red to match autumn tones */
+    z-index: 2;
+  }
+  
+  .stand::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translate(-50%);
+    height: 10px;
+    width: 50px;
+    border-radius: 20px;
+    background-color: #e8d0a9; /* warm beige */
+    box-shadow: 0 10px 0 #e8d0a9, 0 20px 0 #e8d0a9, 0 30px 0 #e8d0a9, 0 40px 0 #e8d0a9, 0 50px 0 #e8d0a9, 0 60px 0 #e8d0a9, 0 70px 0 #e8d0a9, 0 80px 0 #e8d0a9, 0 90px 0 #e8d0a9, 0 100px 0 #e8d0a9, 0 110px 0 #e8d0a9, 0 120px 0 #e8d0a9, 0 130px 0 #e8d0a9, 0 140px 0 #e8d0a9, 0 150px 0 #e8d0a9, 0 160px 0 #e8d0a9, 0 170px 0 #e8d0a9;
+  }
+  
+  .cat {
+    width: 110px;
+    height: 50px;
+    position: absolute;
+    top: calc(50% - 50px);
+    right: 130px;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+  }
+  
+  .cat .body {
+    width: 110px;
+    height: 50px;
+    background-color: rgba(255, 243, 224); /* warm brown */
+    position: absolute;
+    border-top-left-radius: 100px;
+    border-top-right-radius: 100px;
+    animation: body 12s infinite;
+  }
+  
+  .cat .head {
+    content: "";
+    width: 70px;
+    height: 35px;
+    background-color: rgba(255, 243, 224);/* warm brown */
+    position: absolute;
+    top: calc(50% - 10px);
+    left: -40px;
+    border-top-left-radius: 80px;
+    border-top-right-radius: 80px;
+  }
+  
+  .tail-container {
+    position: absolute;
+    right: 0;
+    bottom: -13px;
+    z-index: 3;
+  }
+  
+  .tail {
+    position: absolute;
+    height: 30px;
+    width: 14px;
+    bottom: -10px;
+    right: 0;
+    border-bottom-right-radius: 5px;
+    background: rgba(255, 243, 224); /* warm brown */
+    z-index: 0;
+  }
+  
+  .tail > .tail {
+    animation: tail 12s infinite;
+    height: 100%;
+    width: 14px;
+    transform-origin: left;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    border-top-right-radius: 40px;
+  }
+  
+  .ear {
+    position: absolute;
+    left: 4px;
+    top: -4px;
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 20px solid rgba(255, 243, 224); /* warm brown */
+    transform: rotate(-30deg);
+    animation: left-ear 12s infinite;
+  }
+  
+  .ear + .ear {
+    animation: right-ear 12s infinite;
+    top: -12px;
+    left: 30px;
+  }
+  
+  .nose {
+    position: absolute;
+    bottom: 10px;
+    left: -10px;
+    background-color: #b85f5f; /* muted red */
+    height: 5px;
+    width: 5px;
+    border-radius: 50%;
+  }
+  
+  .whisker-container {
+    position: absolute;
+    bottom: 5px;
+    left: -36px;
+    width: 20px;
+    height: 10px;
+    transform-origin: right;
+    animation: left-whisker 12s infinite;
+  }
+  
+  .whisker-container:nth-child(2) {
+    left: -20px;
+    bottom: 12px;
+    transform-origin: right;
+    transform: rotate(180deg);
+    animation: right-whisker 12s infinite;
+  }
+  
+  .whisker {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    border: 1px solid #4A2C2A; /* warm beige */
+    transform-origin: 100% 0;
+    transform: rotate(10deg);
+  }
+  
+  .whisker:last-child {
+    top: 0;
+    transform: rotate(-20deg);
+  }
+  
+  /* Keyframe animations */
+  @keyframes tail {
+    0% { transform: rotate(0); }
+    20% { transform: rotate(10deg); }
+    40% { transform: rotate(-5deg); }
+    60% { transform: rotate(30deg); }
+    80% { transform: rotate(-2deg); }
+    100% { transform: rotate(10deg); }
+  }
+  
+  @keyframes body {
+    0% { transform: scaleY(1); }
+    20% { transform: scaleY(1.15); }
+    40% { transform: scaleY(1); }
+    60% { transform: scaleY(1.25); }
+    80% { transform: scaleY(1); }
+    100% { transform: scaleY(1.15); }
+  }
+  
+  @keyframes left-whisker {
+    0% { transform: rotate(0); }
+    20% { transform: rotate(-5deg); }
+    40% { transform: rotate(0); }
+    60% { transform: rotate(10deg); }
+    80% { transform: rotate(-5deg); }
+    100% { transform: rotate(10deg); }
+  }
+  
+  @keyframes right-whisker {
+    0% { transform: rotate(180deg); }
+    20% { transform: rotate(190deg); }
+    40% { transform: rotate(180deg); }
+    60% { transform: rotate(175deg); }
+    80% { transform: rotate(190deg); }
+    100% { transform: rotate(180deg); }
+  }
+  
+  @keyframes left-ear {
+    0% { transform: rotate(-20deg); }
+    20% { transform: rotate(-6deg); }
+    40% { transform: rotate(-15deg); }
+    60% { transform: rotate(-15deg); }
+    80% { transform: rotate(-30deg); }
+    100% { transform: rotate(-6deg); }
+  }
+  
+  @keyframes right-ear {
+    0% { transform: rotateZ(-16deg); }
+    20% { transform: rotateZ(-16deg); }
+    40% { transform: rotateZ(-19deg); }
+    60% { transform: rotateZ(-19deg); }
+    80% { transform: rotateZ(-30deg); }
+    100% { transform: rotateZ(-16deg); }
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .footer {
+    position: absolute;
+    bottom: 10px;
+    font-family: 'Quicksand', sans-serif; /* Use Quicksand for body text */    
+    color: #e8d0a9; /* matching the purple cat color */
+    font-size: 14px;
+    z-index: 3;
+  }
+  
+  .footer p {
+    margin: 0;
+  }
+  .music-player {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    top: 60%;
+}
+
+
+/* Background video styling */
+.video-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.background-video {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* Mute button styling */
+#mute-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  background-color: rgba(255, 229, 204); /* Soft light peach for cuteness */
+  color: #5b3a29; /* Deep brown for the icon */
+  border: none;
+  border-radius: 50%;
+  width: 50px; /* Slightly larger for better interaction */
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Initial shadow for depth */
+}
+
+/* Icon styles */
+#mute-btn i {
+  transition: transform 0.3s ease, color 0.3s ease; /* Smooth rotation and color transition */
+  font-size: 1.2em; /* Slightly larger icon for visibility */
+}
+
+/* Hover effect */
+#mute-btn:hover {
+  background-color: rgba(255, 235, 205, 1); /* Brighten on hover with a warmer tone */
+  transform: scale(1.1) rotate(5deg); /* Slightly enlarge and tilt on hover */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+}
+
+/* Focus effect */
+#mute-btn:focus {
+  outline: none; /* Remove outline on focus */
+}
+
+/* Animation when the button is clicked */
+#mute-btn:active {
+  transform: scale(0.95) rotate(-5deg); /* Scale down and tilt when clicked */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Smaller shadow on click */
+}
+
+/* Icon transition for mute/unmute */
+#mute-btn[data-muted="true"] i {
+  transform: rotate(0deg); /* Mute icon */
+  color: #8B4513; /* Saddle brown for muted state */
+}
+
+#mute-btn[data-muted="false"] i {
+  transform: rotate(360deg); /* Rotate to show change */
+  color: #D2691E; /* Chocolate color for unmuted state */
+}
+
+/* Add a pulse effect when hovering */
+#mute-btn:hover {
+  animation: pulse 0.6s infinite; /* Pulse animation */
+}
+
+/* Keyframes for pulse effect */
+@keyframes pulse {
+  0% {
+      transform: scale(1.1);
+  }
+  50% {
+      transform: scale(1.15);
+  }
+  100% {
+      transform: scale(1.1);
+  }
+}
+
+#music-player {
+  background-color: #4A2C2A; /* Dark background for the player */
+  border-radius: 8px;
+  padding: 20px; /* Padding for spacing */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: center; /* Center text and buttons */
+  max-width: 400px; /* Limit width for better aesthetics */
+  margin: 20px auto; /* Center the player on the page */
+  color: #ffffff; /* White text for contrast */
+}
+
+#music-player h2 {
+  font-family: 'Quicksand', sans-serif;; /* Title font */
+  margin-bottom: 15px; /* Spacing below the title */
+}
+
+#music-player button {
+  background: none;
+  border: none;
+  font-size: 24px; /* Button size */
+  cursor: pointer;
+  margin: 0 10px; /* Spacing between buttons */
+  color: #e8d0a9; /* Button color */
+  position: relative; /* Needed for the hover effect */
+  transition: color 0.3s ease, transform 0.3s ease; /* Smooth color and transform transition */
+}
+
+#music-player button:hover {
+  color: #fff; /* Change color on hover for feedback */
+  transform: translateY(-3px) scale(1.1); /* Lift and scale effect */
+}
+
+#music-player button:active {
+  transform: translateY(1px) scale(0.95); /* Shrink when pressed */
+}
+
+/* Progress Bar Styling */
+#progress-container {
+  width: 100%;
+  background-color: #444; /* Background of the progress container */
+  border-radius: 5px; /* Rounded corners */
+  height: 8px; /* Height of the progress bar */
+  margin: 15px 0; /* Spacing above and below */
+  overflow: hidden; /* Prevent overflow */
+}
+
+#progress-bar {
+  height: 100%; /* Full height */
+  background: #e8d0a9; /* Gradient effect */
+  width: 0; /* Initial width */
+  transition: width 0.1s ease; /* Smooth width transition */
+  border-radius: 5px; /* Match corners with the container */
+}
+
+/* Optional: Add styles for the current time and duration */
+#time-display {
+  font-size: 14px; /* Font size for time display */
+  margin-top: 5px; /* Spacing above the time display */
+  color: #ccc; /* Light color for the time */
+}
+

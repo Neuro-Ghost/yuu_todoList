@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/jpg" href="https://i.pinimg.com/564x/e8/df/01/e8df017b8459c3fdc951da06ce0be115.jpg">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.4.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Quicksand:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMmCk1H9b4yD4W4/sYh7RSoS7T7A4to/w9fI5R" crossorigin="anonymous">
+    <title>Yuu Got This</title>
+</head>
+<body>
+    <div class="main">
+        <span class="stand"></span>
+        <div class="cat">
+            <div class="body"></div>
+            <div class="head">
+                <div class="ear"></div>
+                <div class="ear"></div>
+            </div>
+            <div class="face">
+                <div class="nose"></div>
+                <div class="whisker-container">
+                    <div class="whisker"></div>
+                    <div class="whisker"></div>
+                </div>
+                <div class="whisker-container">
+                    <div class="whisker"></div>
+                    <div class="whisker"></div>
+                </div>
+            </div>
+            <div class="tail-container">
+                <div class="tail">
+                    <div class="tail">
+                        <div class="tail">
+                            <div class="tail">
+                                <div class="tail">
+                                    <div class="tail">
+                                        <div class="tail"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <h1 class="title">baby yuu got this</h1>
+        <div class="task-form">
+            <input type="text" id="task-input" placeholder="I am going to finish..." class="task-input">
+            <button id="add-task-btn" class="add-task-btn">add task</button>
+        </div>
+        <ul id="task-list" class="task-list"></ul>
+        <center>
+            <button id="clear-all-btn" class="clear-all-btn">clear all</button>
+        </center>
+
+        <!-- Music Player Section -->
+        <div id="music-player">
+          <h2 id="now-playing"><span id="current-song">None</span></h2>
+          <div id="progress-container">
+              <div id="progress-bar"></div>
+          </div>
+          <button id="play-pause-btn"><i class="fas fa-play"></i></button>
+          <button id="next-btn"><i class="fas fa-step-forward"></i></button>
+          <button id="loop-btn"><i class="fas fa-redo"></i></button>
+          <div id="time-display">0:00 / 0:00</div>
+      </div>
+      <audio id="audio" preload="auto"></audio>
+      
+      <audio id="audio" preload="auto"></audio>
+      
+      
+    </div>
+    <div class="footer">
+        <p>made with care, a.toxy</p>
+    </div>
+    <div class="video-container">
+        <video id="background-video" autoplay muted loop class="background-video">
+            <source src="bg.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <button id="mute-btn" data-muted="false">
+            <i class="fa fa-volume-up"></i> <!-- Initial icon for unmuted state -->
+        </button>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
