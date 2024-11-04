@@ -442,6 +442,8 @@ body {
   
   .footer p {
     margin: 0;
+        color: #fff; 
+
   }
   .music-player {
     position: absolute;
