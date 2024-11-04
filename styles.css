@@ -611,23 +611,23 @@ body {
   transform: translateY(1px) scale(0.95); /* Shrink when pressed */
 }
 
-/* Progress Bar Styling */
 #progress-container {
-  width: 100%;
-  background-color: #444; /* Background of the progress container */
-  border-radius: 5px; /* Rounded corners */
-  height: 8px; /* Height of the progress bar */
-  margin: 15px 0; /* Spacing above and below */
-  overflow: hidden; /* Prevent overflow */
+    width: 100%; /* Full width */
+    height: 10px; /* Height of the progress bar */
+    background-color: #ddd; /* Background color for the container */
+    border-radius: 5px; /* Rounded edges */
+    position: relative; /* Position for inner progress bar */
+    cursor: pointer; /* Change cursor to pointer */
 }
 
 #progress-bar {
-  height: 100%; /* Full height */
-  background: #e8d0a9; /* Gradient effect */
-  width: 0; /* Initial width */
-  transition: width 0.1s ease; /* Smooth width transition */
-  border-radius: 5px; /* Match corners with the container */
+    height: 100%; /* Fill the height of the container */
+    background-color: #ff8c42; /* Color of the progress indicator */
+    width: 0%; /* Start with 0% width */
+    border-radius: 5px; /* Rounded edges */
+    transition: width 0.2s; /* Smooth transition for width change */
 }
+
 
 /* Optional: Add styles for the current time and duration */
 #time-display {
