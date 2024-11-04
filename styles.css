@@ -555,11 +555,21 @@ body {
   text-align: center; /* Center text and buttons */
   max-width: 400px; /* Limit width for better aesthetics */
   margin: 20px auto; /* Center the player on the page */
-  background: linear-gradient(120deg, #5c3d2e, #ff8c42);
+  background: linear-gradient(120deg, #5c3d2e, #a8412d);
   color: #fff; /* White text for contrast */
-  animation: gradientAnimation 12s ease infinite; /* Adjust duration for a smoother transition */
-  transition: background 0.5s ease; /* Smooth transition for background change */
+   background-size: 400% 400%;
+    transition: background 0.3s ease;
 }
+.playing {
+    animation: gradientAnimation 6s ease infinite;
+}
+
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
 
 #music-player h2 {
   font-family: 'Quicksand', sans-serif;; /* Title font */
@@ -611,16 +621,4 @@ body {
   color: #ccc; /* Light color for the time */
 }
 
-
-.playing {
-    animation: gradientAnimation 6s ease infinite;
-}
-
-@keyframes gradientAnimation {
-   0% { background-position: 0% 50%; }
-    25% { background-position: 25% 50%; }
-    50% { background-position: 50% 50%; }
-    75% { background-position: 75% 50%; }
-    100% { background-position: 100% 50%; }
-}
 
