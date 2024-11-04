@@ -317,7 +317,6 @@ document.addEventListener("DOMContentLoaded", function () {
             name: "Devil's Daughter",
             path: "Devil's Daughter.mp3"
         },
-        // You can add more songs here as needed
     ];
 
     let currentTrackIndex = 0;
