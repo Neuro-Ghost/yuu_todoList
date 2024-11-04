@@ -556,8 +556,9 @@ body {
   max-width: 400px; /* Limit width for better aesthetics */
   margin: 20px auto; /* Center the player on the page */
     background: linear-gradient(120deg, #4A2C2A, #e4d3c3, #a8412d, #5c3d2e, #ff8c42);  background-size: 400% 400%;
-  transition: background 0.3s ease;
   color: #ffffff; /* White text for contrast */
+   animation: gradientAnimation 12s ease infinite; /* Adjust duration for a smoother transition */
+    transition: background 0.5s ease; /* Smooth transition for background change */
 }
 
 #music-player h2 {
@@ -616,8 +617,10 @@ body {
 }
 
 @keyframes gradientAnimation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+   0% { background-position: 0% 50%; }
+    25% { background-position: 25% 50%; }
+    50% { background-position: 50% 50%; }
+    75% { background-position: 75% 50%; }
+    100% { background-position: 100% 50%; }
 }
 
