@@ -323,11 +323,9 @@ playPauseBtn.addEventListener('click', () => {
     if (audio.paused) {
         audio.play();
         playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; // Change icon to pause
-        document.getElementById("music-player").classList.add("playing"); // Add class for animation
     } else {
         audio.pause();
         playPauseBtn.innerHTML = '<i class="fas fa-play"></i>'; // Change icon to play
-        document.getElementById("music-player").classList.remove("playing"); // Remove class for animation
     }
 });
 
