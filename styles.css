@@ -555,7 +555,7 @@ body {
   text-align: center; /* Center text and buttons */
   max-width: 400px; /* Limit width for better aesthetics */
   margin: 20px auto; /* Center the player on the page */
-  background: linear-gradient(120deg, #5c3d2e, #a8412d);
+  background: linear-gradient(120deg, #5c3d2e, #d9c5b2);
   color: #fff; /* White text for contrast */
    background-size: 400% 400%;
     transition: background 0.3s ease;
