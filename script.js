@@ -294,6 +294,8 @@ document.addEventListener("DOMContentLoaded", function () {
         { name: "Inazuma Sorrow", path: "Inazuma Sorrow.mp3" },
         { name: "Soft Spot", path: "Soft Spot (Acoustic).mp3" },
         { name: "Devil's Daughter", path: "noname.mp3" },
+        { name: "Cupid (not atoxy's recommendation)", path: "Cupid' (TwinVer.).mp3" },
+
     ];
 
     let currentTrackIndex = 0;
