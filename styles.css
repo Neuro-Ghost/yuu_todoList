@@ -681,3 +681,21 @@ body {
         width: 80px;
       }
     }
+
+
+@media (max-width: 600px) {
+    .music-player {
+        max-width: 100%; /* Full width on small screens */
+        padding: 5px; /* Less padding */
+    }
+
+    button {
+        flex: 1; /* Allow buttons to grow */
+        margin: 0 5px; /* Margin between buttons */
+    }
+
+    .track-info {
+        font-size: 16px; /* Smaller font size */
+    }
+}
+
