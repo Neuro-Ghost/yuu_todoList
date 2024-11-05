@@ -291,6 +291,8 @@ document.addEventListener("DOMContentLoaded", function () {
         { name: "everything, everywhere", path: "everything, everywhere.mp3" },
         { name: "by my side", path: "by my side.mp3" },
         { name: "YOURS", path: "YOURS.mp3" },
+        { name: "tout sen va", path: "tout.mp3" },
+        { name: "Malik al mawt", path: "malik.mp3" },
         { name: "IF ITS NOT YOU", path: "IF ITS NOT YOU.mp3" },
         { name: "Jalil", path: "Jalil.mp3" },
         { name: "Inazuma Sorrow", path: "Inazuma Sorrow.mp3" },
