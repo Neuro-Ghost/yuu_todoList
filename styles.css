@@ -638,3 +638,40 @@ body {
 }
 
 
+@media (max-width: 480px) {
+      .container {
+        width: 100%;
+        margin-top: 20px;
+        padding: 10px;
+      }
+
+      .title {
+        font-size: 20px;
+      }
+
+      .task-input {
+        font-size: 12px;
+      }
+
+      .add-task-btn, .clear-all-btn {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+
+      li {
+        font-size: 12px;
+      }
+
+      /* Further Reduce Cat Size for Mobile */
+      .main {
+        height: 200px;
+        width: 200px;
+      }
+      .cat {
+        width: 60px;
+        height: 30px;
+      }
+      .stand {
+        width: 80px;
+      }
+    }
