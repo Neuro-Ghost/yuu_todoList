@@ -87,9 +87,15 @@ body {
 
 /* Task List Styles */
 .task-list {
-  list-style: none;
-  padding: 0;
+    max-height: 400px; /* Set a maximum height */
+    overflow-y: auto;  /* Enable vertical scrolling */
+    border: 1px solid #ccc; /* Optional: add a border for visibility */
+    padding: 10px; /* Optional: padding for aesthetics */
+    margin: 10px 0; /* Optional: margin to separate from other elements */
+    background: #fff; /* Optional: background color */
+    border-radius: 5px; /* Optional: rounded corners */
 }
+
 
 li {
   display: flex;
