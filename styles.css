@@ -698,4 +698,13 @@ body {
         font-size: 16px; /* Smaller font size */
     }
 }
+/* Hide background video on mobile */
+@media (max-width: 768px) {
+  #background-video {
+    display: none;
+    
+  }
+  .main{
+    display: none;
+}
 
