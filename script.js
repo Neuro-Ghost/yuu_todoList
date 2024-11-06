@@ -29,7 +29,6 @@ muteBtn.addEventListener("click", () => {
     const messages = [
         "Another day, another L.",
         "Everyone's good at something...",
-        "Hop on reload?",
         "Keep at it.",        
     ];
 
@@ -290,15 +289,13 @@ document.addEventListener("DOMContentLoaded", function () {
         { name: "dream", path: "dream.mp3" },
         { name: "everything, everywhere", path: "everything, everywhere.mp3" },
         { name: "by my side", path: "by my side.mp3" },
-        { name: "YOURS", path: "YOURS.mp3" },
         { name: "tout sen va", path: "tout.mp3" },
         { name: "Malik al mawt", path: "malik.mp3" },
-        { name: "IF ITS NOT YOU", path: "IF ITS NOT YOU.mp3" },
         { name: "Jalil", path: "Jalil.mp3" },
         { name: "Inazuma Sorrow", path: "Inazuma Sorrow.mp3" },
         { name: "Soft Spot", path: "Soft Spot (Acoustic).mp3" },
         { name: "Devil's Daughter", path: "noname.mp3" },
-        { name: "Cupid (not atoxy's)", path: "Cupid' (TwinVer.).mp3" },
+        { name: "Cupid TwinVer", path: "Cupid' (TwinVer.).mp3" },
     ];
 
     let currentTrackIndex = 0;
