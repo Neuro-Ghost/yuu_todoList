@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+
     const taskInput = document.getElementById("task-input");
     const addTaskBtn = document.getElementById("add-task-btn");
     const taskList = document.getElementById("task-list");
@@ -381,6 +381,6 @@ playPauseBtn.addEventListener('click', () => {
         const newTime = percentage * audio.duration;
         audio.currentTime = newTime;
     });
-});
+
 
 
