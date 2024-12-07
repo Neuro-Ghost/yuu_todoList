@@ -77,8 +77,8 @@ muteBtn.addEventListener("click", () => {
 
         textBox.textContent = randomMessage;
         textBox.style.position = "absolute";
-        textBox.style.left = ${Math.random() * 90}vw;
-        textBox.style.top = ${Math.random() * 90}vh;
+        textBox.style.left = `${Math.random() * 90}vw`;
+        textBox.style.top = `${Math.random() * 90}vh`;
         textBox.style.backgroundColor = "#e8d0a9";
         textBox.style.padding = "10px";
         textBox.style.borderRadius = "5px";
@@ -113,8 +113,8 @@ muteBtn.addEventListener("click", () => {
         catImage.src = randomImage;
         catImage.alt = "Cute Cat";
         catImage.style.position = "absolute";
-        catImage.style.left = ${Math.random() * 80}vw;
-        catImage.style.top = ${Math.random() * 80}vh;
+        catImage.style.left = `${Math.random() * 80}vw`;
+        catImage.style.top = `${Math.random() * 80}vh`;
         catImage.style.width = "150px";
         catImage.style.height = "150px";
         catImage.style.borderRadius = "15px";
@@ -141,8 +141,8 @@ muteBtn.addEventListener("click", () => {
         catImage.src = randomImage;
         catImage.alt = "Completion Cat";
         catImage.style.position = "absolute";
-        catImage.style.left = ${Math.random() * 80}vw;
-        catImage.style.top = ${Math.random() * 80}vh;
+        catImage.style.left = `${Math.random() * 80}vw`;
+        catImage.style.top = `${Math.random() * 80}vh`;
         catImage.style.width = "150px";
         catImage.style.height = "150px";
         catImage.style.borderRadius = "15px";
@@ -192,10 +192,10 @@ muteBtn.addEventListener("click", () => {
         const li = document.createElement("li");
     
         let dayOptions = daysOfWeek.map(day => {
-            return <option value="${day}" ${day === selectedDay ? 'selected' : ''}>${day}</option>;
+            return `<option value="${day}" ${day === selectedDay ? 'selected' : ''}>${day}</option>`;
         }).join('');
     
-        li.innerHTML = 
+        li.innerHTML = `
             <div class="flex justify-between items-center">
                 <select class="day-selection">
                     ${dayOptions}
@@ -205,7 +205,7 @@ muteBtn.addEventListener("click", () => {
                 <button class="complete-btn">Completed</button>
                 <button class="delete-btn">Delete</button>
             </div>
-        ;
+        `;
     
         taskList.appendChild(li);
         setTimeout(() => {
@@ -323,7 +323,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const currentSeconds = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
         const durationMinutes = Math.floor(audio.duration / 60);
         const durationSeconds = Math.floor(audio.duration % 60).toString().padStart(2, '0');
-        timeDisplay.textContent = ${currentMinutes}:${currentSeconds} / ${durationMinutes}:${durationSeconds};
+        timeDisplay.textContent = `${currentMinutes}:${currentSeconds} / ${durationMinutes}:${durationSeconds}`;
     }
 
 playPauseBtn.addEventListener('click', () => {
@@ -382,3 +382,4 @@ playPauseBtn.addEventListener('click', () => {
         audio.currentTime = newTime;
     });
 });
+
