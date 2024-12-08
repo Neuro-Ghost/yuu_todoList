@@ -6,8 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Add task functionality
 function addTask(day) {
-    const taskInput = document.getElementById(`${day}-task-input`);
-    const taskList = document.getElementById(`${day}-task-list`);
+    const taskInput = document.getElementById(${day}-task-input);
+    const taskList = document.getElementById(${day}-task-list);
     const taskValue = taskInput.value.trim();
 
     if (taskValue !== "") {
@@ -19,7 +19,7 @@ function addTask(day) {
 
         // Add hover indicator
         li.addEventListener('mouseenter', () => {
-            li.setAttribute('title', 'Double-click to delete');
+            li.setAttribute('title', 'clicky clickly deletes');
             li.style.cursor = 'pointer';
             li.style.transform = 'scale(1.05)';
             li.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
@@ -60,8 +60,20 @@ function showTasks(day) {
     taskLists.forEach(taskList => taskList.style.display = 'none');
 
     // Show the selected task list
-    document.getElementById(`${day}-tasks`).style.display = 'block';
+    document.getElementById(${day}-tasks).style.display = 'block';
 }
+
+// Add double-click functionality to remove the task
+li.addEventListener('dblclick', () => {
+    li.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+    li.style.transform = 'scale(0.5)';
+    li.style.opacity = '0';
+    setTimeout(() => {
+        li.remove(); // Remove after animation
+        // Save tasks after removal
+        saveTasks();
+    }, 300); 
+});
 
 // Save tasks to localStorage
 function saveTasks() {
@@ -93,9 +105,12 @@ function loadTasks() {
     if (savedTasks) {
         // Loop through the saved tasks and display them
         for (const day in savedTasks) {
-            const taskList = document.getElementById(`${day}-task-list`);
+            const taskList = document.getElementById(${day}-task-list);
 
             if (taskList) {
+                // Clear existing tasks before loading new ones
+                taskList.innerHTML = '';
+
                 savedTasks[day].forEach(task => {
                     const li = document.createElement('li');
                     li.classList.add('task-item');
@@ -120,10 +135,11 @@ function loadTasks() {
                         li.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
                         li.style.transform = 'scale(0.5)';
                         li.style.opacity = '0';
-                        setTimeout(() => li.remove(), 300); // Remove after animation
-
-                        // Save tasks after removal
-                        saveTasks();
+                        setTimeout(() => {
+                            li.remove(); // Remove after animation
+                            // Save tasks after removal
+                            saveTasks();
+                        }, 300); 
                     });
 
                     // Append the task item to the task list
@@ -176,7 +192,6 @@ const songs = [
 ];
 
 
-document.addEventListener("DOMContentLoaded", function () {
     const loopBtn = document.getElementById("loop-btn");
     const audio = document.getElementById('audio');
     const playPauseBtn = document.getElementById('play-pause-btn');
@@ -227,7 +242,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const currentSeconds = Math.floor(audio.currentTime % 60).toString().padStart(2, '0');
         const durationMinutes = Math.floor(audio.duration / 60);
         const durationSeconds = Math.floor(audio.duration % 60).toString().padStart(2, '0');
-        timeDisplay.textContent = `${currentMinutes}:${currentSeconds} / ${durationMinutes}:${durationSeconds}`;
+        timeDisplay.textContent = ${currentMinutes}:${currentSeconds} / ${durationMinutes}:${durationSeconds};
     }
 
 playPauseBtn.addEventListener('click', () => {
@@ -285,4 +300,3 @@ playPauseBtn.addEventListener('click', () => {
         const newTime = percentage * audio.duration;
         audio.currentTime = newTime;
     });
-});
