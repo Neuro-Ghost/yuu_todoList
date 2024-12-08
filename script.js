@@ -192,7 +192,6 @@ const songs = [
 ];
 
 
-document.addEventListener("DOMContentLoaded", function () {
     const loopBtn = document.getElementById("loop-btn");
     const audio = document.getElementById('audio');
     const playPauseBtn = document.getElementById('play-pause-btn');
@@ -301,4 +300,3 @@ playPauseBtn.addEventListener('click', () => {
         const newTime = percentage * audio.duration;
         audio.currentTime = newTime;
     });
-});
