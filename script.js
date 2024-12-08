@@ -261,17 +261,18 @@ playPauseBtn.addEventListener('click', () => {
         playTrack();
     });
 
-   loopBtn.addEventListener("click", () => {
+    loopBtn.addEventListener('click', () => {
         isLooping = !isLooping;
-        loopBtn.style.color = isLooping ? "#e8d0a9" : "white";
+        audio.loop = isLooping;
+        loopBtn.classList.toggle('active', isLooping);
     });
 
-    audio.addEventListener("ended", function () {
+    audio.addEventListener('timeupdate', updateProgressBar);
+    audio.addEventListener('ended', () => {
         if (!isLooping) {
-            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-            playTrack();
+            nextBtn.click();
         } else {
-            audio.play();
+            playTrack();
         }
     });
 
@@ -280,3 +281,55 @@ playPauseBtn.addEventListener('click', () => {
         audio.currentTime = clickPosition;
     });
 });
+// Motivational messages
+const messages = [
+    "You Got This!",
+    "Stay Positive!",
+    "One Step at a Time!",
+    "Keep Going!",
+    "Believe in Yourself!",
+    "Almost There!"
+];
+
+let messageIndex = 0; // Start with the first message
+const typingText = document.getElementById("typing-text");
+
+function typeMessage(message, callback) {
+    let i = 0;
+    typingText.textContent = ""; // Clear the text
+
+    const typingInterval = setInterval(() => {
+        if (i < message.length) {
+            typingText.textContent += message.charAt(i); // Type one character at a time
+            i++;
+        } else {
+            clearInterval(typingInterval);
+            setTimeout(() => deleteMessage(callback), 1000); // Pause before deleting
+        }
+    }, 100);
+}
+
+function deleteMessage(callback) {
+    const currentMessage = typingText.textContent;
+    let i = currentMessage.length;
+
+    const deletingInterval = setInterval(() => {
+        if (i > 0) {
+            typingText.textContent = currentMessage.substring(0, i - 1); // Remove one character at a time
+            i--;
+        } else {
+            clearInterval(deletingInterval);
+            callback(); // Call the next function once the message is deleted
+        }
+    }, 50);
+}
+
+function startTypingAnimation() {
+    typeMessage(messages[messageIndex], () => {
+        messageIndex = (messageIndex + 1) % messages.length; // Loop through messages
+        startTypingAnimation(); // Start the next message
+    });
+}
+
+// Start the animation
+startTypingAnimation();
