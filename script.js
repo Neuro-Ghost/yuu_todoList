@@ -63,6 +63,18 @@ function showTasks(day) {
     document.getElementById(`${day}-tasks`).style.display = 'block';
 }
 
+// Add double-click functionality to remove the task
+li.addEventListener('dblclick', () => {
+    li.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+    li.style.transform = 'scale(0.5)';
+    li.style.opacity = '0';
+    setTimeout(() => {
+        li.remove(); // Remove after animation
+        // Save tasks after removal
+        saveTasks();
+    }, 300); 
+});
+
 // Save tasks to localStorage
 function saveTasks() {
     const taskLists = document.querySelectorAll('.task-list');
@@ -96,6 +108,9 @@ function loadTasks() {
             const taskList = document.getElementById(`${day}-task-list`);
 
             if (taskList) {
+                // Clear existing tasks before loading new ones
+                taskList.innerHTML = '';
+
                 savedTasks[day].forEach(task => {
                     const li = document.createElement('li');
                     li.classList.add('task-item');
@@ -120,10 +135,11 @@ function loadTasks() {
                         li.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
                         li.style.transform = 'scale(0.5)';
                         li.style.opacity = '0';
-                        setTimeout(() => li.remove(), 300); // Remove after animation
-
-                        // Save tasks after removal
-                        saveTasks();
+                        setTimeout(() => {
+                            li.remove(); // Remove after animation
+                            // Save tasks after removal
+                            saveTasks();
+                        }, 300); 
                     });
 
                     // Append the task item to the task list
