@@ -19,7 +19,7 @@ function addTask(day) {
 
         // Add hover indicator
         li.addEventListener('mouseenter', () => {
-            li.setAttribute('title', 'Double-click to delete');
+            li.setAttribute('title', 'clicky clickly deletes');
             li.style.cursor = 'pointer';
             li.style.transform = 'scale(1.05)';
             li.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
