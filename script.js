@@ -1,276 +1,180 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const taskInput = document.getElementById("task-input");
-    const addTaskBtn = document.getElementById("add-task-btn");
-    const taskList = document.getElementById("task-list");
-    const clearAllBtn = document.getElementById("clear-all-btn");
-const audio = document.getElementById('background-music');
-const loopBtn = document.getElementById('loop-btn');
-
-let isLooping = false;
-const video = document.getElementById("background-video");
-const muteBtn = document.getElementById("mute-btn");
-const muteIcon = muteBtn.querySelector("i");
-
-muteBtn.addEventListener("click", () => {
-    if (video.muted) {
-        video.muted = false;
-        muteIcon.classList.replace("fa-volume-mute", "fa-volume-up"); // Change to unmuted icon
-        muteBtn.setAttribute('data-muted', 'false'); // Update data attribute
-    } else {
-        video.muted = true;
-        muteIcon.classList.replace("fa-volume-up", "fa-volume-mute"); // Change to muted icon
-        muteBtn.setAttribute('data-muted', 'true'); // Update data attribute
-    }
+// Task Manager Logic
+document.addEventListener('DOMContentLoaded', () => {
+    showTasks('monday'); // Show Monday's task list by default
+    loadTasks(); // Load saved tasks from localStorage
 });
 
+// Add task functionality
+function addTask(day) {
+    const taskInput = document.getElementById(`${day}-task-input`);
+    const taskList = document.getElementById(`${day}-task-list`);
+    const taskValue = taskInput.value.trim();
 
+    if (taskValue !== "") {
+        const li = document.createElement('li');
+        li.classList.add('task-item'); // Add a class for styling
 
+        // Create the task content
+        li.textContent = taskValue;
 
-    const messages = [
-        "Another day, another L.",
-        "Everyone's good at something...",
-        "Keep at it.",        
-    ];
-
-    const initialCatImages = [
-        "https://38.media.tumblr.com/457b296c98ddd69f5327b8b5881e4ffe/tumblr_nedxajZ0hW1tw5bhko1_400.gif",
-        "https://64.media.tumblr.com/bf764f6e75024cd690b1c11e1b0eed15/18a26cfa8ad7e0da-14/s250x400/fab9def043d1a713e9cae44e8fe42971afa135bc.gif"
-      
-    ];
-
-    const completedCatImages = [
-        "https://i.makeagif.com/media/7-28-2016/LHHsiF.gif",
-    ];
-
-    const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-
-    // Get the current day of the week
-    function getCurrentDayIndex() {
-        return new Date().getDay();
-    }
-
-    // Calculate the day difference relative to the current day
-    function getDayDifference(selectedDay) {
-        const currentDayIndex = getCurrentDayIndex();
-        const selectedDayIndex = daysOfWeek.indexOf(selectedDay);
-        const difference = (selectedDayIndex - currentDayIndex + 7) % 7;
-        return difference;
-    }
-
-    // Function to sort tasks based on the selected day relative to the current day
-    function sortTasks() {
-        const tasks = [...taskList.querySelectorAll("li")];
-        
-        tasks.sort((a, b) => {
-            const dayA = a.querySelector(".day-selection").value;
-            const dayB = b.querySelector(".day-selection").value;
-            return getDayDifference(dayA) - getDayDifference(dayB);
+        // Add hover indicator
+        li.addEventListener('mouseenter', () => {
+            li.setAttribute('title', 'Double-click to delete');
+            li.style.cursor = 'pointer';
+            li.style.transform = 'scale(1.05)';
+            li.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
         });
 
-        taskList.innerHTML = ''; // Clear the list
-        tasks.forEach(task => taskList.appendChild(task)); // Re-add sorted tasks
-    }
-
-    function createRandomTextBox() {
-        const randomMessage = messages[Math.floor(Math.random() * messages.length)];
-        const textBox = document.createElement("div");
-
-        textBox.textContent = randomMessage;
-        textBox.style.position = "absolute";
-        textBox.style.left = `${Math.random() * 90}vw`;
-        textBox.style.top = `${Math.random() * 90}vh`;
-        textBox.style.backgroundColor = "#e8d0a9";
-        textBox.style.padding = "10px";
-        textBox.style.borderRadius = "5px";
-        textBox.style.boxShadow = "0 0 5px rgba(0, 0, 0, 0.2)";
-        textBox.style.fontSize = "14px";
-        textBox.style.color = "#4A2C2A";
-        textBox.style.opacity = "0";
-        textBox.style.transition = "opacity 1s";
-
-        document.body.appendChild(textBox);
-
-        setTimeout(() => {
-            textBox.style.opacity = "1";
-        }, 10);
-
-        setTimeout(() => {
-            textBox.remove();
-        }, 5000);
-    }
-
-    function startRandomTextBoxes() {
-        setInterval(() => {
-            createRandomTextBox();
-        }, Math.random() * 90000 + 30000);
-    }
-
-    startRandomTextBoxes();
-
-    function showCuteCat() {
-        const catImage = document.createElement("img");
-        const randomImage = initialCatImages[Math.floor(Math.random() * initialCatImages.length)];
-        catImage.src = randomImage;
-        catImage.alt = "Cute Cat";
-        catImage.style.position = "absolute";
-        catImage.style.left = `${Math.random() * 80}vw`;
-        catImage.style.top = `${Math.random() * 80}vh`;
-        catImage.style.width = "150px";
-        catImage.style.height = "150px";
-        catImage.style.borderRadius = "15px";
-        catImage.style.boxShadow = "0 0 15px rgba(0, 0, 0, 0.3)";
-        catImage.style.transition = "opacity 1s, transform 1s";
-        catImage.style.opacity = "0";
-        catImage.style.transform = "scale(0.5)";
-
-        document.body.appendChild(catImage);
-
-        setTimeout(() => {
-            catImage.style.opacity = "1";
-            catImage.style.transform = "scale(1)";
-        }, 10);
-
-        setTimeout(() => {
-            catImage.remove();
-        }, 5000);
-    }
-
-    function showCompletionCat() {
-        const catImage = document.createElement("img");
-        const randomImage = completedCatImages[Math.floor(Math.random() * completedCatImages.length)];
-        catImage.src = randomImage;
-        catImage.alt = "Completion Cat";
-        catImage.style.position = "absolute";
-        catImage.style.left = `${Math.random() * 80}vw`;
-        catImage.style.top = `${Math.random() * 80}vh`;
-        catImage.style.width = "150px";
-        catImage.style.height = "150px";
-        catImage.style.borderRadius = "15px";
-        catImage.style.boxShadow = "0 0 15px rgba(0, 0, 0, 0.3)";
-        catImage.style.transition = "opacity 1s, transform 1s";
-        catImage.style.opacity = "0";
-        catImage.style.transform = "scale(0.5)";
-
-        document.body.appendChild(catImage);
-
-        setTimeout(() => {
-            catImage.style.opacity = "1";
-            catImage.style.transform = "scale(1)";
-        }, 10);
-
-        setTimeout(() => {
-            catImage.remove();
-        }, 5000);
-    }
-
-    function saveTasks() {
-        const tasks = [];
-        taskList.querySelectorAll("li").forEach(li => {
-            const taskText = li.querySelector("span").textContent;
-            const isCompleted = li.classList.contains("completed");
-            const selectedDay = li.querySelector(".day-selection").value;
-
-            tasks.push({
-                text: taskText,
-                completed: isCompleted,
-                day: selectedDay
-            });
+        li.addEventListener('mouseleave', () => {
+            li.removeAttribute('title');
+            li.style.transform = 'scale(1)';
+            li.style.boxShadow = 'none';
         });
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-    }
 
-    function loadTasks() {
-        const tasks = JSON.parse(localStorage.getItem("tasks"));
-        if (tasks) {
-            tasks.forEach(task => {
-                addTask(task.text, task.completed, task.day);
-            });
-        }
-    }
+        // Add double-click functionality to remove the task
+        li.addEventListener('dblclick', () => {
+            li.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+            li.style.transform = 'scale(0.5)';
+            li.style.opacity = '0';
+            setTimeout(() => li.remove(), 300); // Remove after animation
 
-    function addTask(taskText, isCompleted = false, selectedDay = '') {
-        const li = document.createElement("li");
-    
-        let dayOptions = daysOfWeek.map(day => {
-            return `<option value="${day}" ${day === selectedDay ? 'selected' : ''}>${day}</option>`;
-        }).join('');
-    
-        li.innerHTML = `
-            <div class="flex justify-between items-center">
-                <select class="day-selection">
-                    ${dayOptions}
-                </select>
-                <span>${taskText}</span>
-                <br>
-                <button class="complete-btn">Completed</button>
-                <button class="delete-btn">Delete</button>
-            </div>
-        `;
-    
+            // Save tasks after removal
+            saveTasks();
+        });
+
+        // Append the task item to the task list
         taskList.appendChild(li);
-        setTimeout(() => {
-            li.classList.add("show");
-        }, 10);
-    
-        if (isCompleted) {
-            li.classList.add("completed");
-        }
-    
-    
-        // Event listener for changing the day selection
-        const daySelection = li.querySelector(".day-selection");
-        daySelection.addEventListener("change", function () {
-            saveTasks();
-            sortTasks();  // Sort tasks when day is changed
-        });
-    
-        // Event listener for the complete button
-        const completeBtn = li.querySelector(".complete-btn");
-        completeBtn.addEventListener("click", function () {
-            li.classList.toggle("completed");
-            showCompletionCat();
-            saveTasks();
-        });
-    
-        // Event listener for the delete button
-        const deleteBtn = li.querySelector(".delete-btn");
-        deleteBtn.addEventListener("click", function () {
-            li.classList.remove("show");
-            setTimeout(() => {
-                li.remove();
-                saveTasks();
-            }, 500);
-        });
-    
+
+        // Save tasks after addition
         saveTasks();
-        showCuteCat();
-        sortTasks();  // Sort tasks when a new task is added
+
+        // Clear the input field after adding the task
+        taskInput.value = "";
     }
-    
+}
 
+// Show tasks for a specific day
+function showTasks(day) {
+    // Hide all task lists
+    const taskLists = document.querySelectorAll('.task-list');
+    taskLists.forEach(taskList => taskList.style.display = 'none');
 
-    addTaskBtn.addEventListener("click", function () {
-        console.log("Add Task button clicked"); // Debug line
-        const taskText = taskInput.value.trim();
-        if (taskText !== "") {
-            addTask(taskText);
-            taskInput.value = "";
+    // Show the selected task list
+    document.getElementById(`${day}-tasks`).style.display = 'block';
+}
+
+// Save tasks to localStorage
+function saveTasks() {
+    const taskLists = document.querySelectorAll('.task-list');
+    const allTasks = {};
+
+    // Loop through each day and get its tasks
+    taskLists.forEach(list => {
+        const day = list.id.split('-')[0];
+        const tasks = [];
+
+        const taskItems = list.querySelectorAll('li');
+        taskItems.forEach(item => {
+            tasks.push(item.textContent);
+        });
+
+        allTasks[day] = tasks;
+    });
+
+    // Save the task data to localStorage
+    localStorage.setItem('tasks', JSON.stringify(allTasks));
+}
+
+// Load tasks from localStorage
+function loadTasks() {
+    // Get the tasks data from localStorage
+    const savedTasks = JSON.parse(localStorage.getItem('tasks'));
+
+    if (savedTasks) {
+        // Loop through the saved tasks and display them
+        for (const day in savedTasks) {
+            const taskList = document.getElementById(`${day}-task-list`);
+
+            if (taskList) {
+                savedTasks[day].forEach(task => {
+                    const li = document.createElement('li');
+                    li.classList.add('task-item');
+                    li.textContent = task;
+
+                    // Add hover indicator and delete functionality
+                    li.addEventListener('mouseenter', () => {
+                        li.setAttribute('title', 'Double-click to delete');
+                        li.style.cursor = 'pointer';
+                        li.style.transform = 'scale(1.05)';
+                        li.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                    });
+
+                    li.addEventListener('mouseleave', () => {
+                        li.removeAttribute('title');
+                        li.style.transform = 'scale(1)';
+                        li.style.boxShadow = 'none';
+                    });
+
+                    // Add double-click functionality to remove the task
+                    li.addEventListener('dblclick', () => {
+                        li.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                        li.style.transform = 'scale(0.5)';
+                        li.style.opacity = '0';
+                        setTimeout(() => li.remove(), 300); // Remove after animation
+
+                        // Save tasks after removal
+                        saveTasks();
+                    });
+
+                    // Append the task item to the task list
+                    taskList.appendChild(li);
+                });
+            }
         }
-    });
+    }
+}
 
-    taskInput.addEventListener("keypress", function (e) {
-        if (e.key === "Enter") {
-            addTaskBtn.click();
-        }
-    });
+// Highlight selected day tasks
+document.querySelectorAll(".tab-button").forEach(button => {
+    button.addEventListener("click", () => {
+        // Remove the "selected-button" class from all buttons
+        document.querySelectorAll(".tab-button").forEach(btn => {
+            btn.classList.remove("selected-button");
+        });
 
-    clearAllBtn.addEventListener("click", function () {
-        taskList.querySelectorAll("li").forEach(li => li.remove());
-        localStorage.removeItem("tasks");
-    });
+        // Add the "selected-button" class to the clicked button
+        button.classList.add("selected-button");
 
-    loadTasks();
+        // Display tasks for the selected day
+        const day = button.getAttribute("data-day");
+        showTasks(day);
+    });
 });
+
+// Example: Call this function with the selected day
+document.getElementById('monday-btn').addEventListener('click', () => showTasks('monday'));
+document.getElementById('tuesday-btn').addEventListener('click', () => showTasks('tuesday'));
+document.getElementById('wednesday-btn').addEventListener('click', () => showTasks('wednesday'));
+document.getElementById('thursday-btn').addEventListener('click', () => showTasks('thursday'));
+document.getElementById('friday-btn').addEventListener('click', () => showTasks('friday'));
+
+// Music Player Logic
+const songs = [
+    { name: "enta zaalan menni", path: "enta zaalan menni.mp3" },
+    { name: "dream", path: "dream.mp3" },
+    { name: "everything, everywhere", path: "everything, everywhere.mp3" },
+    { name: "by my side", path: "by my side.mp3" },
+    { name: "tout sen va", path: "tout.mp3" },
+    { name: "Malik al mawt", path: "malik.mp3" },
+    { name: "Jalil", path: "Jalil.mp3" },
+    { name: "Inazuma Sorrow", path: "Inazuma Sorrow.mp3" },
+    { name: "Soft Spot", path: "Soft Spot (Acoustic).mp3" },
+    { name: "Devil's Daughter", path: "noname.mp3" },
+    { name: "Cupid TwinVer", path: "Cupid' (TwinVer.).mp3" },
+    {name: "baby blue", path: "rocco - baby blue (lyrics).mp3"},
+    {name: "10' ", path: "LAYLOW - 10'.mp3"}
+];
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const loopBtn = document.getElementById("loop-btn");
@@ -382,4 +286,3 @@ playPauseBtn.addEventListener('click', () => {
         audio.currentTime = newTime;
     });
 });
-
