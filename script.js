@@ -36,10 +36,11 @@ function addTask(day) {
             li.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
             li.style.transform = 'scale(0.5)';
             li.style.opacity = '0';
-            setTimeout(() => li.remove(), 300); // Remove after animation
-
-            // Save tasks after removal
-            saveTasks();
+            setTimeout(() => {
+                li.remove(); // Remove after animation
+                // Save tasks after removal
+                saveTasks();
+            }, 300);
         });
 
         // Append the task item to the task list
@@ -120,10 +121,11 @@ function loadTasks() {
                         li.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
                         li.style.transform = 'scale(0.5)';
                         li.style.opacity = '0';
-                        setTimeout(() => li.remove(), 300); // Remove after animation
-
-                        // Save tasks after removal
-                        saveTasks();
+                        setTimeout(() => {
+                            li.remove(); // Remove after animation
+                            // Save tasks after removal
+                            saveTasks();
+                        }, 300);
                     });
 
                     // Append the task item to the task list
@@ -174,7 +176,6 @@ const songs = [
     {name: "baby blue", path: "rocco - baby blue (lyrics).mp3"},
     {name: "10' ", path: "LAYLOW - 10'.mp3"}
 ];
-
 
 document.addEventListener("DOMContentLoaded", function () {
     const loopBtn = document.getElementById("loop-btn");
@@ -234,55 +235,49 @@ playPauseBtn.addEventListener('click', () => {
         if (audio.paused) {
             audio.play();
             playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
-            musicPlayer.classList.add("playing"); // Add the gradient animation class
+            musicPlayer.classList.add("playing"); 
         } else {
             audio.pause();
-            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-            musicPlayer.classList.remove("playing"); // Add the gradient animation class
-
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>'; 
+            musicPlayer.classList.remove("playing"); 
         }
     });
 
-    nextBtn.addEventListener("click", function () {
-        currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    nextBtn.addEventListener('click', () => {
+        if (currentTrackIndex < playlist.length - 1) {
+            currentTrackIndex++;
+        } else {
+            currentTrackIndex = 0;
+        }
         playTrack();
     });
 
-    // Back button functionality
-    backBtn.addEventListener("click", function () {
-        if (audio.currentTime > 5) {
-            // If more than 5 seconds into the song, restart the song
-            audio.currentTime = 0;
+    backBtn.addEventListener('click', () => {
+        if (currentTrackIndex > 0) {
+            currentTrackIndex--;
         } else {
-            // Otherwise, go to the previous track
-            currentTrackIndex = (currentTrackIndex - 1 + playlist.length) % playlist.length;
-            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-            playTrack();
+            currentTrackIndex = playlist.length - 1;
         }
+        playTrack();
     });
 
-    loopBtn.addEventListener("click", () => {
+    loopBtn.addEventListener('click', () => {
         isLooping = !isLooping;
-        loopBtn.style.color = isLooping ? "#e8d0a9" : "white";
-    });
-
-    audio.addEventListener("ended", function () {
-        if (!isLooping) {
-            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
-            playTrack();
-        } else {
-            audio.play();
-        }
+        audio.loop = isLooping;
+        loopBtn.classList.toggle('active', isLooping);
     });
 
     audio.addEventListener('timeupdate', updateProgressBar);
+    audio.addEventListener('ended', () => {
+        if (!isLooping) {
+            nextBtn.click();
+        } else {
+            playTrack();
+        }
+    });
 
-    progressContainer.addEventListener("click", function (event) {
-        const totalWidth = this.clientWidth;
-        const offsetX = event.offsetX;
-        const percentage = offsetX / totalWidth;
-        const newTime = percentage * audio.duration;
-        audio.currentTime = newTime;
+    progressContainer.addEventListener('click', (e) => {
+        const clickPosition = (e.offsetX / progressContainer.offsetWidth) * audio.duration;
+        audio.currentTime = clickPosition;
     });
 });
