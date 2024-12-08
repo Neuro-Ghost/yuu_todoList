@@ -283,12 +283,10 @@ playPauseBtn.addEventListener('click', () => {
 });
 // Motivational messages
 const messages = [
-    "You Got This!",
-    "Stay Positive!",
-    "One Step at a Time!",
-    "Keep Going!",
-    "Believe in Yourself!",
-    "Almost There!"
+    "Another day, another L",
+"baby yuu got this",
+    "The syllabus and you have something in common: neither of you knows what’s going on."
+
 ];
 
 let messageIndex = 0; // Start with the first message
