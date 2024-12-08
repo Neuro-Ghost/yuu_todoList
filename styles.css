@@ -155,35 +155,7 @@ ul {
   list-style: none; /* Optional: Removes default bullet points */
 }
 
-/* Delete Button */
-li .delete-btn {
-    background-color: #F24444; /* Soft red */
-    border: none;
-    border-radius: 25%; /* Circular button */
-    width: 30px;
-    height: 30px;
-    font-family: 'Quicksand', sans-serif;
-    font-size: 14px;
-    color: #FFFFFF; /* White text */
-    font-weight: bold;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    margin-right: 10%;
-}
 
-li .delete-btn:hover {
-    background-color: #D12C2C; /* Deeper red */
-    transform: scale(1.1); /* Slight enlargement on hover */
-}
-
-li .delete-btn:active {
-    background-color: #A11919; /* Dark red for active state */
-    transform: scale(0.9); /* Press effect */
-}
 
   /* Smooth task addition */
 li {
@@ -410,10 +382,11 @@ li {
 #animated-title {
   font-family: 'Dancing Script', cursive;
   font-size: 2rem;
-  color: #4B2E2C;
+  color: #5b3a29;
   white-space: nowrap;
   overflow: hidden;
   display: inline-block;
+    position: absolute;
 }
 
 /* Blinking cursor effect */
