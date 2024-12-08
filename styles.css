@@ -386,6 +386,8 @@ li {
   white-space: nowrap;
   overflow: hidden;
   display: inline-block;
+    position: absolute;
+    top: 20%;
 }
 
 /* Blinking cursor effect */
