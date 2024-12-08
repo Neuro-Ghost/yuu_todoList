@@ -284,16 +284,8 @@ playPauseBtn.addEventListener('click', () => {
 // Motivational messages
 const messages = [
 "Another day, another L",
-"Studying sucks, but failing sucks more :/",
-"Yuu can do this, just one more page!",
-"So close, yet so far.",
-"GGz, but not done yet!",
-"One more page, one more victory!",
-"Failing? Not on your watch.",
-"Almost there, don’t quit now!",
-"I know it's hard...but... THATS WHAT SHE SAID",
-"You’ve got this... after a few more breaks!",
-];
+    "baby yuu got this!"
+]
 
 let messageIndex = 0; // Start with the first message
 const typingText = document.getElementById("typing-text");
