@@ -409,8 +409,8 @@ li {
 /* Title Container */
 #animated-title {
   font-family: 'Dancing Script', cursive;
-  font-size: 2.5rem;
-  color: #e8d0a9;
+  font-size: 2rem;
+  color: #4B2E2C;
   white-space: nowrap;
   overflow: hidden;
   display: inline-block;
@@ -420,7 +420,7 @@ li {
 .blinking-cursor {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #e8d0a9;
+  color: #4B2E2C;
   animation: blink 0.6s step-end infinite;
 }
 
