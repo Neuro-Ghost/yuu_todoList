@@ -261,18 +261,17 @@ playPauseBtn.addEventListener('click', () => {
         playTrack();
     });
 
-    loopBtn.addEventListener('click', () => {
+   loopBtn.addEventListener("click", () => {
         isLooping = !isLooping;
-        audio.loop = isLooping;
-        loopBtn.classList.toggle('active', isLooping);
+        loopBtn.style.color = isLooping ? "#e8d0a9" : "white";
     });
 
-    audio.addEventListener('timeupdate', updateProgressBar);
-    audio.addEventListener('ended', () => {
+    audio.addEventListener("ended", function () {
         if (!isLooping) {
-            nextBtn.click();
-        } else {
+            currentTrackIndex = (currentTrackIndex + 1) % playlist.length;
             playTrack();
+        } else {
+            audio.play();
         }
     });
 
