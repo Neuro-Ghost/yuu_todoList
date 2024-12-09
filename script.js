@@ -211,6 +211,7 @@ document.addEventListener("DOMContentLoaded", function () {
     currentSongDisplay.textContent = playlist[currentTrackIndex].name;
 
     function playTrack() {
+        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>'; 
         if (audio.src !== playlist[currentTrackIndex].path) {
             audio.src = playlist[currentTrackIndex].path;
             audio.play();
