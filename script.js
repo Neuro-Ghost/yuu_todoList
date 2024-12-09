@@ -1,5 +1,6 @@
 // Task Manager Logic
 document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('monday-btn').classList.add("selected-button");
     showTasks('monday'); // Show Monday's task list by default
     loadTasks(); // Load saved tasks from localStorage
 });
