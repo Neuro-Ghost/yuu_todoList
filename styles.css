@@ -216,6 +216,7 @@ li {
 }
 
 /* Mute button styling */
+/* Mute button styling */
 #mute-btn {
   position: fixed;
   top: 20px;
@@ -247,6 +248,7 @@ li {
   background-color: rgba(255, 235, 205, 1); /* Brighten on hover with a warmer tone */
   transform: scale(1.1) rotate(5deg); /* Slightly enlarge and tilt on hover */
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); /* Enhance shadow on hover */
+  animation: pulse 0.6s infinite; /* Pulse animation */
 }
 
 /* Focus effect */
@@ -271,24 +273,34 @@ li {
   color: #D2691E; /* Chocolate color for unmuted state */
 }
 
-/* Add a pulse effect when hovering */
-#mute-btn:hover {
-  animation: pulse 0.6s infinite; /* Pulse animation */
-}
-
-/* Keyframes for pulse effect */
+/* Pulse animation */
 @keyframes pulse {
   0% {
-      transform: scale(1.1);
+    transform: scale(1);
   }
   50% {
-      transform: scale(1.15);
+    transform: scale(1.1);
   }
   100% {
-      transform: scale(1.1);
+    transform: scale(1);
   }
 }
 
+/* Additional smooth transition for the button */
+#mute-btn {
+  animation: smoothTransition 0.5s ease-in-out; /* Smooth transition on load */
+}
+
+@keyframes smoothTransition {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 #music-player {
   border-radius: 8px;
   padding: 20px; /* Padding for spacing */
