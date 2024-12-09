@@ -329,3 +329,24 @@ function startTypingAnimation() {
 
 // Start the animation
 startTypingAnimation();
+
+ // Get references to the video and button elements
+    const video = document.getElementById('background-video');
+    const muteButton = document.getElementById('mute-btn');
+
+    // Add a click event listener to the mute button
+    muteButton.addEventListener('click', function() {
+        // Check the current mute state
+        const isMuted = muteButton.getAttribute('data-muted') === 'true';
+
+        // Toggle the mute state
+        if (isMuted) {
+            video.muted = false; // Unmute the video
+            muteButton.setAttribute('data-muted', 'false'); // Update the data attribute
+            muteButton.innerHTML = '<i class="fa fa-volume-up"></i>'; // Change icon to volume up
+        } else {
+            video.muted = true; // Mute the video
+            muteButton.setAttribute('data-muted', 'true'); // Update the data attribute
+            muteButton.innerHTML = '<i class="fa fa-volume-off"></i>'; // Change icon to volume off
+        }
+    });
