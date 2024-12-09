@@ -347,6 +347,6 @@ startTypingAnimation();
         } else {
             video.muted = true; // Mute the video
             muteButton.setAttribute('data-muted', 'true'); // Update the data attribute
-            muteButton.innerHTML = '<i class="fa fa-volume-off"></i>'; // Change icon to volume off
+            muteButton.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>'; // Change icon to volume off
         }
     });
