@@ -15,7 +15,7 @@ body {
     position: absolute;
     z-index: 1;
     margin-top: 50px;
-    max-width: 600px;
+    max-width: 800px;
     margin-left: auto;
     margin-right: auto;
     background-color: rgba(255, 243, 224, 0.9); /* Light beige */
