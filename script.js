@@ -198,12 +198,13 @@ document.addEventListener("DOMContentLoaded", function () {
         { name: "tout sen va", path: "tout.mp3" },
         { name: "Malik al mawt", path: "malik.mp3" },
         { name: "Jalil", path: "Jalil.mp3" },
-        { name: "Inazuma Sorrow", path: "Inazuma Sorrow.mp3" },
+        {name: "blue salvia", path: "pryvt   blue salvia  lyrics    YouTube.mp3"},
+        {name: "Inazuma Sorrow", path: "Inazuma Sorrow.mp3" },
         { name: "Soft Spot", path: "Soft Spot (Acoustic).mp3" },
         { name: "Devil's Daughter", path: "noname.mp3" },
         { name: "Cupid TwinVer", path: "Cupid' (TwinVer.).mp3" },
         {name: "baby blue", path: "rocco - baby blue (lyrics).mp3"},
-        {name: "10' ", path: "LAYLOW - 10'.mp3"}
+        {name: "10' ", path: "LAYLOW - 10'.mp3"}, 
     ];
 
     let currentTrackIndex = 0;
