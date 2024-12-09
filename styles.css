@@ -286,21 +286,8 @@ li {
   }
 }
 
-/* Additional smooth transition for the button */
-#mute-btn {
-  animation: smoothTransition 0.5s ease-in-out; /* Smooth transition on load */
-}
 
-@keyframes smoothTransition {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
+
 #music-player {
   border-radius: 8px;
   padding: 20px; /* Padding for spacing */
