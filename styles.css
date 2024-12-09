@@ -28,7 +28,6 @@ body {
   /* Task Input Field */
 input {
     width: 100%;
-    max-width: 400px; /* Limit the width */
     padding: 10px 15px;
     margin: 10px 0;
     font-size: 16px;
