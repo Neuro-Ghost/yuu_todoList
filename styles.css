@@ -52,7 +52,7 @@ input:focus {
 
 /* Placeholder Text */
 input::placeholder {
-    color: #4B2E2C; /* Warm caramel */
+    color: #a9a9a9; /* light grey */
 }
 .tabs {
     display: flex;
