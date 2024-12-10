@@ -275,7 +275,7 @@ playPauseBtn.addEventListener('click', () => {
         if (isLooping) {
             loopBtn.innerHTML = '<i class="fas fa-redo"></i>'; // Add "On" text or icon
             loopBtn.style.color = '#FFF'; // Change color to gold
-            loopBtn.style.textShadow = '0 0 10px #d9c5b2'; // Add glowing effect
+            loopBtn.style.textShadow = '0 0 5px #d9c5b2, 0 0 15px #d9c5b2'; // Softer, multi-layered glow
         } else {
             loopBtn.innerHTML = '<i class="fas fa-redo"></i>'; // Default loop icon
             loopBtn.style.color = ''; // Reset color
