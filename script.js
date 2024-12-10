@@ -283,6 +283,32 @@ playPauseBtn.addEventListener('click', () => {
         const clickPosition = (e.offsetX / progressContainer.offsetWidth) * audio.duration;
         audio.currentTime = clickPosition;
     });
+     const songSelector = document.getElementById("song-selector");
+
+    // Populate dropdown with playlist songs
+    function populateSongSelector() {
+        // Clear any existing options except the placeholder
+        songSelector.innerHTML = '<option value="">Select a song</option>';
+    
+        playlist.forEach((track, index) => {
+            const option = document.createElement("option");
+            option.value = index; // Set the value as the index of the song
+            option.textContent = track.name; // Display the song name
+            songSelector.appendChild(option);
+        });
+    }
+    
+    // Handle song selection
+    songSelector.addEventListener("change", (e) => {
+        const selectedIndex = e.target.value; // Get the selected index
+        if (selectedIndex !== "") {
+            currentTrackIndex = parseInt(selectedIndex, 10); // Convert index to integer
+            playTrack(); // Play the selected track
+        }
+    });
+    
+    // Call populateSongSelector to populate the dropdown
+    populateSongSelector();
 });
 // Motivational messages
 const messages = [
