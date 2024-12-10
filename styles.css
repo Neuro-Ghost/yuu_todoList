@@ -369,6 +369,37 @@ li {
   border-radius: 5px; /* Match corners with the container */
   cursor: pointer;
 }
+#song-selector {
+  width: 100%; /* Full width for consistency */
+  padding: 10px; /* Inner spacing for better usability */
+  margin-bottom: 15px; /* Spacing below the dropdown */
+  border-radius: 5px; /* Rounded corners */
+  border: none; /* Remove default border */
+  background: linear-gradient(120deg, #5c3d2e, #d9c5b2); /* Match the gradient */
+  color: #fff; /* Text color */
+  font-family: 'Quicksand', sans-serif; /* Match the font style */
+  font-size: 16px; /* Readable font size */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+#song-selector:hover {
+  background: linear-gradient(120deg, #d9c5b2, #5c3d2e); /* Reverse gradient on hover */
+}
+
+#song-selector:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.8); /* Glow effect */
+}
+
+#song-selector option {
+  background: #5c3d2e; /* Dropdown option background */
+  color: #fff; /* Dropdown option text color */
+  font-family: 'Quicksand', sans-serif; /* Font style */
+  padding: 10px; /* Padding for better spacing */
+}
+
 
 /* Optional: Add styles for the current time and duration */
 #time-display {
