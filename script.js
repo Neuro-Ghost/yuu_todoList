@@ -264,10 +264,23 @@ playPauseBtn.addEventListener('click', () => {
         playTrack();
     });
 
-    loopBtn.addEventListener('click', () => {
+  loopBtn.addEventListener('click', () => {
         isLooping = !isLooping;
         audio.loop = isLooping;
+    
+        // Toggle active class and update button appearance
         loopBtn.classList.toggle('active', isLooping);
+    
+        // Change the button's content or add a glowing effect
+        if (isLooping) {
+            loopBtn.innerHTML = '<i class="fas fa-redo"></i>'; // Add "On" text or icon
+            loopBtn.style.color = '#FFF'; // Change color to gold
+            loopBtn.style.textShadow = '0 0 10px #d9c5b2'; // Add glowing effect
+        } else {
+            loopBtn.innerHTML = '<i class="fas fa-redo"></i>'; // Default loop icon
+            loopBtn.style.color = ''; // Reset color
+            loopBtn.style.textShadow = ''; // Remove glow
+        }
     });
 
     audio.addEventListener('timeupdate', updateProgressBar);
