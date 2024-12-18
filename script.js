@@ -325,11 +325,10 @@ playPauseBtn.addEventListener('click', () => {
 });
 // Motivational messages
 const messages = [
-    "baby yuu got this!"
+    "baby yuu got this!",
     "Every step you take, I’m here cheering for you, always.",
     "Yuu've got this, believe in yourself!",
     "Every little victory of yours feels like my own.",
-    "Even the cat’s cheering for Yuu!",
 ];
 
 
