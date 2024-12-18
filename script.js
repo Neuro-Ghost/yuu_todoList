@@ -341,7 +341,7 @@ function typeMessage(message, callback) {
             i++;
         } else {
             clearInterval(typingInterval);
-            setTimeout(() => deleteMessage(callback), 1000); // Pause before deleting
+            setTimeout(() => deleteMessage(callback), 10000); // Pause before deleting
         }
     }, 100);
 }
@@ -359,6 +359,7 @@ function deleteMessage(callback) {
           callback(); // Call the next function once the message is deleted
        }
    }, 50);
+}
 
 
 function startTypingAnimation() {
