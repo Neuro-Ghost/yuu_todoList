@@ -326,7 +326,12 @@ playPauseBtn.addEventListener('click', () => {
 // Motivational messages
 const messages = [
     "baby yuu got this!"
-]
+    "Every step you take, I’m here cheering for you, always.",
+    "Yuu've got this, believe in yourself!",
+    "Every little victory of yours feels like my own."
+    "Even the cat’s cheering for Yuu!",
+];
+
 
 let messageIndex = 0; // Start with the first message
 const typingText = document.getElementById("typing-text");
@@ -341,7 +346,7 @@ function typeMessage(message, callback) {
             i++;
         } else {
             clearInterval(typingInterval);
-            setTimeout(() => deleteMessage(callback), 10000); // Pause before deleting
+            setTimeout(() => deleteMessage(callback), 5000); // Pause before deleting
         }
     }, 100);
 }
