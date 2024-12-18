@@ -325,7 +325,6 @@ playPauseBtn.addEventListener('click', () => {
 });
 // Motivational messages
 const messages = [
-"Another day, another L",
     "baby yuu got this!"
 ]
 
@@ -342,25 +341,25 @@ function typeMessage(message, callback) {
             i++;
         } else {
             clearInterval(typingInterval);
-            setTimeout(() => deleteMessage(callback), 1000); // Pause before deleting
+            setTimeout(() => deleteMessage(callback), 10000); // Pause before deleting
         }
     }, 100);
 }
 
 function deleteMessage(callback) {
-    const currentMessage = typingText.textContent;
+  const currentMessage = typingText.textContent;
     let i = currentMessage.length;
 
-    const deletingInterval = setInterval(() => {
-        if (i > 0) {
-            typingText.textContent = currentMessage.substring(0, i - 1); // Remove one character at a time
-            i--;
+  const deletingInterval = setInterval(() => {
+   if (i > 0) {
+     typingText.textContent = currentMessage.substring(0, i - 1); // Remove one character at a time
+           i--;
         } else {
-            clearInterval(deletingInterval);
-            callback(); // Call the next function once the message is deleted
-        }
-    }, 50);
-}
+           clearInterval(deletingInterval);
+          callback(); // Call the next function once the message is deleted
+       }
+   }, 50);
+
 
 function startTypingAnimation() {
     typeMessage(messages[messageIndex], () => {
