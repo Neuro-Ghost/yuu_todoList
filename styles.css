@@ -444,3 +444,17 @@ li {
   background: #D3874D;
   border-radius: 5px;
 }
+@media screen and (max-width: 600px) {
+  .container {
+    width: 90%;
+    padding: 15px;
+  }
+
+  input {
+    font-size: 14px;
+  }
+
+  #music-player {
+    max-width: 90%;
+  }
+}
