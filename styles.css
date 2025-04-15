@@ -434,3 +434,13 @@ li {
   }
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #f0e1cc;
+}
+::-webkit-scrollbar-thumb {
+  background: #D3874D;
+  border-radius: 5px;
+}
