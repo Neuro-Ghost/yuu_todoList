@@ -325,11 +325,24 @@ playPauseBtn.addEventListener('click', () => {
 });
 // Motivational messages
 const messages = [
-    "baby yuu got this!",
-    "Every step you take, I’m here cheering for you, always.",
-    "Yuu've got this, believe in yourself!",
-    "Every little victory of yours feels like my own.",
+    "Don’t think I stopped loving you — I’m just letting you miss me properly 😌",
+    "Babe, I bet you're still rolling your eyes at my cheesy lines... and secretly smiling.",
+    "We’re on a break, but my heart didn’t get the memo.",
+    "Careful, Yuna. Stay this cute and I might just fall for you all over again.",
+    "I dare you not to think about me after reading this 😏",
+    "Miss me yet? Don’t worry, I miss you enough for the both of us.",
+    "Just checking in to remind you: you're still the best part of my chaos.",
+    "Stop being so cute — you're making this break way too hard.",
+    "Bet you’re pretending not to miss me… good luck with that 😘",
+    "I paused us, not my feelings. Nice try tho."
+"Babe?",
+"Baby.....",
+"Babyyy",
+"Wrong name...",
+"Nothing just like that.",
+
 ];
+
 
 
 let messageIndex = 0; // Start with the first message
