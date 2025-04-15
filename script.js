@@ -331,7 +331,7 @@ const messages = [
     "I dare you not to think about me after reading this 😏",
     "Miss me yet? Don’t worry, I miss you enough for the both of us.",
     "Just checking in to remind you: you're still the best part of my chaos.",
-     "You're my adorable mess, snorts, burps, nerdy rants and all.",",
+     "You're my adorable mess, snorts, burps, nerdy rants and all.",
     "Bet you’re pretending not to miss me… good luck with that 😘",
 "Babe?",
 "Baby.....",
