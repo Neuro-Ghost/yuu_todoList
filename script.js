@@ -326,18 +326,13 @@ playPauseBtn.addEventListener('click', () => {
 // Motivational messages
 const messages = [
     "I know you can do it, my strong petite nerdy loutre!",
-    "My tiny sleepy gremlin, you’re doing amazing. I’m proud of you always.",
-    "I dare you not to think about me after reading this 😏",
-    "Miss me yet? Don’t worry, I miss you enough for the both of us.",
-    "Just checking in to remind you: you're still the best part of my chaos.",
      "You're my adorable mess, snorts, burps, nerdy rants and all.",
 "Babe?",
 "Baby.....",
 "Babyyyyyyy....",
 "......",
-"Wrong name...",
+"Wrong name...😏",
 "Nothing just like that.",
-"Babe, I bet you're still rolling your eyes at my cheesy lines... and secretly smiling.",
 
 
 ];
