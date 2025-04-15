@@ -334,7 +334,7 @@ const messages = [
     "Just checking in to remind you: you're still the best part of my chaos.",
     "Stop being so cute — you're making this break way too hard.",
     "Bet you’re pretending not to miss me… good luck with that 😘",
-    "I paused us, not my feelings. Nice try tho."
+    "I paused us, not my feelings. Nice try tho.",
 "Babe?",
 "Baby.....",
 "Babyyy",
