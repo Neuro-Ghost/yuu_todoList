@@ -105,17 +105,44 @@
     </div>
 
     <script>
-        function checkSecret() {
+        async function checkSecret() {
+            // Get the message the user typed
             const messageInput = document.getElementById('secretMessage');
-            const secret = messageInput.value.trim().toLowerCase();
-
-            if (secret === "yes daddy") {
-                window.location.href = "index.html";
-            } else {
-                alert("Wrong name...");
+            const secret = messageInput.value.trim();
+          
+            // Now, instead of checking here, we're going to send this 'secret'
+            // to our serverless function at the '/api/verify-secret' address
+          
+            try {
+              // Send a 'POST' request to the API endpoint
+              const response = await fetch('/api/verify-secret', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json', // Tell the server we're sending JSON data
+                },
+                // Send the user's secret in the body of the request as JSON
+                body: JSON.stringify({ secret }),
+              });
+          
+              // Wait for the server to send back its response and then try to read it as JSON
+              const data = await response.json();
+          
+              // Now, we look at the 'data' we got back from the server
+              if (data.success) {
+                // If the server said the secret was correct, we redirect to index.html
+                window.location.href = data.redirectUrl;
+              } else {
+                // If the server said the secret was wrong, we show the error message
+                alert(data.message);
                 messageInput.value = ""; // Clear the input field
+              }
+            } catch (error) {
+              // If something went wrong with sending the message or getting the response,
+              // we'll log the error and show a general error message
+              console.error('Error verifying secret:', error);
+              alert('An error occurred while verifying the secret.');
             }
-        }
+          }
     </script>
 </body>
 </html>
