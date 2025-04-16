@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,72 +13,72 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Quicksand:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMmCk1H9b4yD4W4/sYh7RSoS7T7A4to/w9fI5R" crossorigin="anonymous">
+
     <title>Yuu Got This</title>
 </head>
-<body> 
+<body>
     <div id="animated-title">
-            <span id="typing-text"></span><span class="blinking-cursor">|</span>
-        </div>
+        <span id="typing-text"></span><span class="blinking-cursor">|</span>
+    </div>
+
+
     <div class="container">
-       
-        <!-- Tabs for Days -->
+
         <div class="tabs">
-            <button class="tab-button" id="monday-btn">Monday</button>
-            <button class="tab-button" id="tuesday-btn">Tuesday</button>
-            <button class="tab-button" id="wednesday-btn">Wednesday</button>
-            <button class="tab-button" id="thursday-btn">Thursday</button>
-            <button class="tab-button" id="friday-btn">Friday</button>
+            <button class="tab-button" id="monday-btn" data-day="monday">Monday</button>
+            <button class="tab-button" id="tuesday-btn" data-day="tuesday">Tuesday</button>
+            <button class="tab-button" id="wednesday-btn" data-day="wednesday">Wednesday</button>
+            <button class="tab-button" id="thursday-btn" data-day="thursday">Thursday</button>
+            <button class="tab-button" id="friday-btn" data-day="friday">Friday</button>
         </div>
-        
-        <!-- Task List for Each Day -->
+
         <div class="task-list" id="monday-tasks">
             <h2>Monday Tasks</h2>
             <ul id="monday-task-list"></ul>
             <input type="text" id="monday-task-input" placeholder="eende lyum...">
-            <button onclick="addTask('monday')" class="add-task-btn">Add Task</button>
+            <button class="add-task-btn" data-day="monday">Add Task</button>
         </div>
         <div class="task-list" id="tuesday-tasks">
             <h2>Tuesday Tasks</h2>
             <ul id="tuesday-task-list"></ul>
             <input type="text" id="tuesday-task-input" placeholder="eende lyum...">
-            <button onclick="addTask('tuesday')" class="add-task-btn">Add Task</button>
+            <button class="add-task-btn" data-day="tuesday">Add Task</button>
         </div>
         <div class="task-list" id="wednesday-tasks">
             <h2>Wednesday Tasks</h2>
             <ul id="wednesday-task-list"></ul>
             <input type="text" id="wednesday-task-input" placeholder="eende lyum...">
-            <button onclick="addTask('wednesday')" class="add-task-btn">Add Task</button>
+            <button class="add-task-btn" data-day="wednesday">Add Task</button>
         </div>
         <div class="task-list" id="thursday-tasks">
             <h2>Thursday Tasks</h2>
             <ul id="thursday-task-list"></ul>
             <input type="text" id="thursday-task-input" placeholder="eende lyum...">
-            <button onclick="addTask('thursday')" class="add-task-btn">Add Task</button>
+            <button class="add-task-btn" data-day="thursday">Add Task</button>
         </div>
         <div class="task-list" id="friday-tasks">
             <h2>Friday Tasks</h2>
             <ul id="friday-task-list"></ul>
             <input type="text" id="friday-task-input" placeholder="eende lyum...">
-            <button onclick="addTask('friday')" class="add-task-btn">Add Task</button>
+            <button class="add-task-btn" data-day="friday">Add Task</button>
         </div>
-           <!-- Music Player Section -->
-           <div id="music-player">
-            <h2 id="now-playing"><span id="current-song">None</span></h2>
-            <div id="progress-container">
-                <div id="progress-bar"></div>
-            </div>
-            <select id="song-selector">
-                <option value="">Select a song</option>
-            </select>
-            <button id="back-btn"><i class="fa-solid fa-backward-step"></i></button>
-            <button id="play-pause-btn"><i class="fas fa-play"></i></button>
-            <button id="next-btn"><i class="fa-solid fa-forward-step"></i></button>
-            <button id="loop-btn"><i class="fas fa-redo"></i></button>
-            <div id="time-display">0:00 / 0:00</div>
-        </div>
-        <audio id="audio" preload="auto"></audio>
-        
-      </div>
+            <div id="music-player">
+             <h2 id="now-playing"><span id="current-song">None</span></h2>
+             <div id="progress-container">
+                 <div id="progress-bar"></div>
+             </div>
+             <select id="song-selector">
+                 <option value="">Select a song</option>
+             </select>
+             <button id="back-btn"><i class="fa-solid fa-backward-step"></i></button>
+             <button id="play-pause-btn"><i class="fas fa-play"></i></button>
+             <button id="next-btn"><i class="fa-solid fa-forward-step"></i></button>
+             <button id="loop-btn"><i class="fas fa-redo"></i></button>
+             <div id="time-display">0:00 / 0:00</div>
+         </div>
+         <audio id="audio" preload="auto"></audio>
+
+    </div>
     </div>
 
     <div class="footer">
@@ -91,12 +90,11 @@
             Your browser does not support the video tag.
         </video>
         <button id="mute-btn" data-muted="false">
-            <i class="fa fa-volume-up"></i> <!-- Initial icon for unmuted state -->
-        </button>
+            <i class="fa fa-volume-up"></i> </button>
     </div>
-    
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Sortable/1.14.0/Sortable.min.js"></script>
-    <script src="script.js"></script>
+    <script type="module" src="firebase.js"></script>   <script type="module" src="script.js"></script>
+
+
 
 
 </body>

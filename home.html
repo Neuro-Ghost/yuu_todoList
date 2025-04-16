@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" type="image/jpg" href="https://i.pinimg.com/564x/e8/df/01/e8df017b8459c3fdc951da06ce0be115.jpg">
+    <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Quicksand:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMmCk1H9b4yD4W4/sYh7RSoS7T7A4to/w9fI5R" crossorigin="anonymous">
+    <title>Welcome</title>
+    <style>
+        .home-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: white;
+            text-align: center;
+            position: relative; /* For absolute positioning of the video */
+            z-index: 1; /* Ensure text is above the video */
+        }
+
+        .prompt-container {
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for readability */
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3em;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 15px;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 1em;
+            text-align: center;
+        }
+
+        button {
+            padding: 12px 25px;
+            background-color: #d9c5b2;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #b8a38f;
+        }
+
+        .video-container-home {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1; /* Place behind other content */
+        }
+
+        .background-video-home {
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+    <div class="home-container">
+        <div class="prompt-container">
+            <h1>Baby...?</h1>
+            <input type="text" id="secretMessage" placeholder="hmm....">
+            <button onclick="checkSecret()">Get In!</button>
+        </div>
+    </div>
+
+    <div class="video-container-home">
+        <video id="background-video-home" autoplay muted loop class="background-video-home" preload="auto">
+            <source src="bg.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <script>
+        function checkSecret() {
+            const messageInput = document.getElementById('secretMessage');
+            const secret = messageInput.value.trim().toLowerCase();
+
+            if (secret === "yes daddy") {
+                window.location.href = "index.html";
+            } else {
+                alert("Wrong name...");
+                messageInput.value = ""; // Clear the input field
+            }
+        }
+    </script>
+</body>
+</html>

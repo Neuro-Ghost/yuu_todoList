@@ -1,8 +1,19 @@
 // Task Manager Logic
+import { db, auth } from './firebase.js'; // Import Firebase Firestore and Auth
+import { setDoc, doc, getDoc } from 'https://www.gstatic.com/firebasejs/10.10.0/firebase-firestore.js';
+
 document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('monday-btn').classList.add("selected-button");
     showTasks('monday'); // Show Monday's task list by default
-    loadTasks(); // Load saved tasks from localStorage
+    loadTasksFromFirebase(); // Load tasks from Firebase on page load
+
+    // Attach event listeners to the "Add Task" buttons
+    document.querySelectorAll('.add-task-btn').forEach(button => {
+        button.addEventListener('click', function() {
+            const day = this.getAttribute('data-day');
+            addTask(day);
+        });
+    });
 });
 
 // Add task functionality
@@ -40,7 +51,7 @@ function addTask(day) {
             setTimeout(() => {
                 li.remove(); // Remove after animation
                 // Save tasks after removal
-                saveTasks();
+                saveTasksToFirebase();
             }, 300);
         });
 
@@ -48,7 +59,7 @@ function addTask(day) {
         taskList.appendChild(li);
 
         // Save tasks after addition
-        saveTasks();
+        saveTasksToFirebase();
 
         // Clear the input field after adding the task
         taskInput.value = "";
@@ -65,8 +76,8 @@ function showTasks(day) {
     document.getElementById(`${day}-tasks`).style.display = 'block';
 }
 
-// Save tasks to localStorage
-function saveTasks() {
+// Save tasks to Firebase Firestore
+async function saveTasksToFirebase() {
     const taskLists = document.querySelectorAll('.task-list');
     const allTasks = {};
 
@@ -83,61 +94,75 @@ function saveTasks() {
         allTasks[day] = tasks;
     });
 
-    // Save the task data to localStorage
-    localStorage.setItem('tasks', JSON.stringify(allTasks));
-}
-
-// Load tasks from localStorage
-function loadTasks() {
-    // Get the tasks data from localStorage
-    const savedTasks = JSON.parse(localStorage.getItem('tasks'));
-
-    if (savedTasks) {
-        // Loop through the saved tasks and display them
-        for (const day in savedTasks) {
-            const taskList = document.getElementById(`${day}-task-list`);
-
-            if (taskList) {
-                savedTasks[day].forEach(task => {
-                    const li = document.createElement('li');
-                    li.classList.add('task-item');
-                    li.textContent = task;
-
-                    // Add hover indicator and delete functionality
-                    li.addEventListener('mouseenter', () => {
-                        li.setAttribute('title', 'Double-click to delete');
-                        li.style.cursor = 'pointer';
-                        li.style.transform = 'scale(1.05)';
-                        li.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
-                    });
-
-                    li.addEventListener('mouseleave', () => {
-                        li.removeAttribute('title');
-                        li.style.transform = 'scale(1)';
-                        li.style.boxShadow = 'none';
-                    });
-
-                    // Add double-click functionality to remove the task
-                    li.addEventListener('dblclick', () => {
-                        li.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
-                        li.style.transform = 'scale(0.5)';
-                        li.style.opacity = '0';
-                        setTimeout(() => {
-                            li.remove(); // Remove after animation
-                            // Save tasks after removal
-                            saveTasks();
-                        }, 300);
-                    });
-
-                    // Append the task item to the task list
-                    taskList.appendChild(li);
-                });
-            }
-        }
+    // Save tasks to Firebase Firestore
+    try {
+        await setDoc(doc(db, "tasks", "dailyTasks"), allTasks);
+        console.log("Tasks saved to Firebase");
+    } catch (error) {
+        console.error("Error saving tasks to Firebase: ", error);
     }
 }
 
-// Highlight selected day tasks
+// Load tasks from Firebase Firestore
+async function loadTasksFromFirebase() {
+    try {
+        const docRef = doc(db, "tasks", "dailyTasks");
+        const docSnap = await getDoc(docRef);
+
+        if (docSnap.exists()) {
+            const savedTasks = docSnap.data();
+            console.log("Tasks loaded from Firebase:", savedTasks);
+            // Loop through the saved tasks and display them
+            for (const day in savedTasks) {
+                const taskList = document.getElementById(`${day}-task-list`);
+
+                if (taskList) {
+                    // Clear existing tasks before loading
+                    taskList.innerHTML = '';
+                    savedTasks[day].forEach(task => {
+                        const li = document.createElement('li');
+                        li.classList.add('task-item');
+                        li.textContent = task;
+
+                        // Add hover indicator and delete functionality (same as before)
+                        li.addEventListener('mouseenter', () => {
+                            li.setAttribute('title', 'Double-click to delete');
+                            li.style.cursor = 'pointer';
+                            li.style.transform = 'scale(1.05)';
+                            li.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
+                        });
+
+                        li.addEventListener('mouseleave', () => {
+                            li.removeAttribute('title');
+                            li.style.transform = 'scale(1)';
+                            li.style.boxShadow = 'none';
+                        });
+
+                        // Add double-click functionality to remove the task (same as before)
+                        li.addEventListener('dblclick', () => {
+                            li.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                            li.style.transform = 'scale(0.5)';
+                            li.style.opacity = '0';
+                            setTimeout(() => {
+                                li.remove();
+                                saveTasksToFirebase(); // Save after removal
+                            }, 300);
+                        });
+
+                        // Append the task item to the task list
+                        taskList.appendChild(li);
+                    });
+                }
+            }
+        } else {
+            console.log("No tasks document found in Firebase.");
+        }
+    } catch (error) {
+        console.error("Error loading tasks from Firebase: ", error);
+    }
+}
+
+// Highlight selected day tasks (remains the same)
 document.querySelectorAll(".tab-button").forEach(button => {
     button.addEventListener("click", () => {
         // Remove the "selected-button" class from all buttons
@@ -154,14 +179,14 @@ document.querySelectorAll(".tab-button").forEach(button => {
     });
 });
 
-// Example: Call this function with the selected day
+// Example: Call this function with the selected day (remains the same)
 document.getElementById('monday-btn').addEventListener('click', () => showTasks('monday'));
 document.getElementById('tuesday-btn').addEventListener('click', () => showTasks('tuesday'));
 document.getElementById('wednesday-btn').addEventListener('click', () => showTasks('wednesday'));
 document.getElementById('thursday-btn').addEventListener('click', () => showTasks('thursday'));
 document.getElementById('friday-btn').addEventListener('click', () => showTasks('friday'));
 
-// Music Player Logic
+// Music Player Logic (remains the same)
 const songs = [
     { name: "enta zaalan menni", path: "enta zaalan menni.mp3" },
     { name: "dream", path: "dream.mp3" },
@@ -204,7 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
         { name: "Devil's Daughter", path: "noname.mp3" },
         { name: "Cupid TwinVer", path: "Cupid' (TwinVer.).mp3" },
         {name: "baby blue", path: "rocco - baby blue (lyrics).mp3"},
-        {name: "10' ", path: "Laylow  10  Lyrics   YouTube.mp3"}, 
+        {name: "10' ", path: "Laylow  10  Lyrics   YouTube.mp3"},
     ];
 
     let currentTrackIndex = 0;
@@ -213,7 +238,7 @@ document.addEventListener("DOMContentLoaded", function () {
     currentSongDisplay.textContent = playlist[currentTrackIndex].name;
 
     function playTrack() {
-        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
+        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
         if (audio.src !== playlist[currentTrackIndex].path) {
             audio.src = playlist[currentTrackIndex].path;
             audio.play();
@@ -237,12 +262,12 @@ document.addEventListener("DOMContentLoaded", function () {
 playPauseBtn.addEventListener('click', () => {
         if (audio.paused) {
             audio.play();
-            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>'; 
-            musicPlayer.classList.add("playing"); 
+            playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            musicPlayer.classList.add("playing");
         } else {
             audio.pause();
-            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>'; 
-            musicPlayer.classList.remove("playing"); 
+            playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            musicPlayer.classList.remove("playing");
         }
     });
 
@@ -267,10 +292,10 @@ playPauseBtn.addEventListener('click', () => {
   loopBtn.addEventListener('click', () => {
         isLooping = !isLooping;
         audio.loop = isLooping;
-    
+
         // Toggle active class and update button appearance
         loopBtn.classList.toggle('active', isLooping);
-    
+
         // Change the button's content or add a glowing effect
         if (isLooping) {
             loopBtn.innerHTML = '<i class="fas fa-redo"></i>'; // Add "On" text or icon
@@ -302,7 +327,7 @@ playPauseBtn.addEventListener('click', () => {
     function populateSongSelector() {
         // Clear any existing options except the placeholder
         songSelector.innerHTML = '<option value="">Select a song</option>';
-    
+
         playlist.forEach((track, index) => {
             const option = document.createElement("option");
             option.value = index; // Set the value as the index of the song
@@ -310,7 +335,7 @@ playPauseBtn.addEventListener('click', () => {
             songSelector.appendChild(option);
         });
     }
-    
+
     // Handle song selection
     songSelector.addEventListener("change", (e) => {
         const selectedIndex = e.target.value; // Get the selected index
@@ -319,11 +344,11 @@ playPauseBtn.addEventListener('click', () => {
             playTrack(); // Play the selected track
         }
     });
-    
+
     // Call populateSongSelector to populate the dropdown
     populateSongSelector();
 });
-// Motivational messages
+// Motivational messages (remains the same)
 const messages = [
     "I know you can do it, my strong petite nerdy loutre!",
      "You're my adorable mess, snorts, burps, nerdy rants and all.",
@@ -333,69 +358,44 @@ const messages = [
 "......",
 "Wrong name...😏",
 "Nothing just like that.",
-
-
 ];
 
-
-
-let messageIndex = 0; // Start with the first message
+let messageIndex = 0;
 const typingText = document.getElementById("typing-text");
 
 function typeMessage(message, callback) {
     let i = 0;
-    typingText.textContent = ""; // Clear the text
-    typingText.classList.add("visible"); // Fade in
+    typingText.textContent = "";
+    typingText.classList.add("visible");
 
     const typingInterval = setInterval(() => {
         if (i < message.length) {
-            typingText.textContent += message.charAt(i); // Type one character at a time
+            typingText.textContent += message.charAt(i);
             i++;
         } else {
             clearInterval(typingInterval);
             setTimeout(() => {
-                typingText.classList.remove("visible"); // Start fade out
-                setTimeout(() => deleteMessage(callback), 500); // Wait for fade-out before deleting
-            }, 5000); // Pause before deleting
+                typingText.classList.remove("visible");
+                setTimeout(() => deleteMessage(callback), 500);
+            }, 5000);
         }
     }, 100);
 }
 
-
 function deleteMessage(callback) {
-    typingText.classList.remove("visible"); // Fade out
-    setTimeout(callback, 500); // Wait for fade-out before starting the next
+    typingText.classList.remove("visible");
+    setTimeout(callback, 500);
 }
-
-
 
 function startTypingAnimation() {
     typeMessage(messages[messageIndex], () => {
-        messageIndex = (messageIndex + 1) % messages.length; // Loop through messages
-        startTypingAnimation(); // Start the next message
+        messageIndex = (messageIndex + 1) % messages.length;
+        startTypingAnimation();
     });
 }
 
-// Start the animation
 startTypingAnimation();
 
- // Get references to the video and button elements
+ // Get references to the video and button elements (remains the same)
     const video = document.getElementById('background-video');
     const muteButton = document.getElementById('mute-btn');
-
-    // Add a click event listener to the mute button
-    muteButton.addEventListener('click', function() {
-        // Check the current mute state
-        const isMuted = muteButton.getAttribute('data-muted') === 'true';
-
-        // Toggle the mute state
-        if (isMuted) {
-            video.muted = false; // Unmute the video
-            muteButton.setAttribute('data-muted', 'false'); // Update the data attribute
-            muteButton.innerHTML = '<i class="fa fa-volume-up"></i>'; // Change icon to volume up
-        } else {
-            video.muted = true; // Mute the video
-            muteButton.setAttribute('data-muted', 'true'); // Update the data attribute
-            muteButton.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>'; // Change icon to volume off
-        }
-    });
