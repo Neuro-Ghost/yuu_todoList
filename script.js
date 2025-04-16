@@ -345,6 +345,7 @@ const typingText = document.getElementById("typing-text");
 function typeMessage(message, callback) {
     let i = 0;
     typingText.textContent = ""; // Clear the text
+    typingText.classList.add("visible"); // Fade in
 
     const typingInterval = setInterval(() => {
         if (i < message.length) {
@@ -352,10 +353,14 @@ function typeMessage(message, callback) {
             i++;
         } else {
             clearInterval(typingInterval);
-            setTimeout(() => deleteMessage(callback), 5000); // Pause before deleting
+            setTimeout(() => {
+                typingText.classList.remove("visible"); // Start fade out
+                setTimeout(() => deleteMessage(callback), 500); // Wait for fade-out before deleting
+            }, 5000); // Pause before deleting
         }
     }, 100);
 }
+
 
 function deleteMessage(callback) {
   const currentMessage = typingText.textContent;
