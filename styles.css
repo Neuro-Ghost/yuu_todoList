@@ -15,7 +15,7 @@ body {
   }
   
   .container {
-      position: relative; /* more natural layout */
+      position: absolute; /* more natural layout */
   margin-top: 80px;
   top: 15%;
     z-index: 1;
