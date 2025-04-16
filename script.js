@@ -363,19 +363,10 @@ function typeMessage(message, callback) {
 
 
 function deleteMessage(callback) {
-  const currentMessage = typingText.textContent;
-    let i = currentMessage.length;
-
-  const deletingInterval = setInterval(() => {
-   if (i > 0) {
-     typingText.textContent = currentMessage.substring(0, i - 1); // Remove one character at a time
-           i--;
-        } else {
-           clearInterval(deletingInterval);
-          callback(); // Call the next function once the message is deleted
-       }
-   }, 50);
+    typingText.classList.remove("visible"); // Fade out
+    setTimeout(callback, 500); // Wait for fade-out before starting the next
 }
+
 
 
 function startTypingAnimation() {
