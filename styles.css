@@ -14,9 +14,9 @@ body {
   }
   
   .container {
-position: relative; /* more natural layout */
+position: absolute; /* more natural layout */
   margin-top: 50px;
-  top: auto;
+  top: 15%;
     z-index: 1;
     max-width: 800px;
     margin-left: auto;
