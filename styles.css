@@ -461,3 +461,10 @@ li {
 .tab-button {
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
+#typing-text {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+#typing-text.visible {
+  opacity: 1;
+}
