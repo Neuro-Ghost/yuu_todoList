@@ -8,16 +8,15 @@ body {
     display: flex;
     justify-content: center; 
     align-items: center; 
-    flex-direction: column; /* Helps if you want footer at bottom */
 }
 
     min-height: 100vh; 
   }
   
   .container {
-      position: absolute; /* more natural layout */
-  margin-top: 80px;
-  top: 15%;
+position: relative; /* more natural layout */
+  margin-top: 50px;
+  top: auto;
     z-index: 1;
     max-width: 800px;
     margin-left: auto;
