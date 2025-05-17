@@ -51,6 +51,7 @@
     </div>
 
     <div class="container">
+        
         <div class="tabs">
             <button class="tab-button" id="monday-btn" data-day="monday">Monday</button>
             <button class="tab-button" id="tuesday-btn" data-day="tuesday">Tuesday</button>
@@ -59,35 +60,40 @@
             <button class="tab-button" id="friday-btn" data-day="friday">Friday</button>
         </div>
 
-        <div class="task-list" id="monday-tasks">
+         <div class="task-list" id="monday-tasks">
             <h2>Monday Tasks</h2>
             <ul id="monday-task-list"></ul>
             <input type="text" id="monday-task-input" placeholder="eende lyum...">
             <button class="add-task-btn" data-day="monday">Add Task</button>
+            <button class="clear-tasks-btn" data-day="monday">Clear Tasks</button> <!- ADD THIS LINE -->
         </div>
         <div class="task-list" id="tuesday-tasks">
             <h2>Tuesday Tasks</h2>
             <ul id="tuesday-task-list"></ul>
             <input type="text" id="tuesday-task-input" placeholder="eende lyum...">
             <button class="add-task-btn" data-day="tuesday">Add Task</button>
+            <button class="clear-tasks-btn" data-day="tuesday">Clear Tasks</button> <!- ADD THIS LINE -->
         </div>
         <div class="task-list" id="wednesday-tasks">
             <h2>Wednesday Tasks</h2>
             <ul id="wednesday-task-list"></ul>
             <input type="text" id="wednesday-task-input" placeholder="eende lyum...">
             <button class="add-task-btn" data-day="wednesday">Add Task</button>
+            <button class="clear-tasks-btn" data-day="wednesday">Clear Tasks</button> <!- ADD THIS LINE -->
         </div>
         <div class="task-list" id="thursday-tasks">
             <h2>Thursday Tasks</h2>
             <ul id="thursday-task-list"></ul>
             <input type="text" id="thursday-task-input" placeholder="eende lyum...">
             <button class="add-task-btn" data-day="thursday">Add Task</button>
+            <button class="clear-tasks-btn" data-day="thursday">Clear Tasks</button> <!- ADD THIS LINE -->
         </div>
         <div class="task-list" id="friday-tasks">
             <h2>Friday Tasks</h2>
             <ul id="friday-task-list"></ul>
             <input type="text" id="friday-task-input" placeholder="eende lyum...">
             <button class="add-task-btn" data-day="friday">Add Task</button>
+            <button class="clear-tasks-btn" data-day="friday">Clear Tasks</button> <!- ADD THIS LINE -->
         </div>
         <div id="music-player">
             <h2 id="now-playing"><span id="current-song">None</span></h2>
@@ -102,6 +108,7 @@
             <button id="next-btn"><i class="fa-solid fa-forward-step"></i></button>
             <button id="loop-btn"><i class="fas fa-redo"></i></button>
             <div id="time-display">0:00 / 0:00</div>
+            <audio id="audio" preload="auto"></audio>
         </div>
     </div>
 
@@ -118,20 +125,7 @@
     </div>
     <script type="module" src="firebase.js"></script>
     <script type="module" src="script.js"></script>
-    <script>
-  // Show loading overlay if redirected from home.html after success
-  if (sessionStorage.getItem('showLoading') === 'true') {
-    const overlay = document.getElementById('loading-overlay');
-    overlay.style.display = 'flex';
-  }
-
-  // When the whole page is loaded, hide the overlay and clear the flag
-  window.onload = () => {
-    const overlay = document.getElementById('loading-overlay');
-    if (overlay) overlay.style.display = 'none';
-    sessionStorage.removeItem('showLoading');
-  };
-</script>
+    
 
 </body>
 </html>

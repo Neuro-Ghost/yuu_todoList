@@ -112,7 +112,31 @@ input::placeholder {
     background-color: #944A24; /* Deep brown for active state */
     transform: scale(0.98); /* Press effect */
 }
+/* Clear Task Button */
+.clear-tasks-btn {
+    background-color: #D3874D; /* Deep caramel */
+    border: none;
+    border-radius: 5px;
+    padding: 8px 15px; /* Slightly smaller padding */
+    margin-left: 10px; /* Space it from the add button */
+    font-family: 'Quicksand', sans-serif;
+    font-size: 14px;
+    color: #FFFFFF; /* White text */
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Less intense shadow */
+}
 
+.clear-tasks-btn:hover {
+    background-color: #B56D3B; /* Darker caramel */
+    transform: translateY(-2px); /* Slight lift */
+}
+
+.clear-tasks-btn:active {
+    background-color: #944A24; /* Deep brown */
+    transform: scale(0.98); /* Press effect */
+}
 .selected-button {
     background-color: #5b3a29; /* Example color */
     color: white;
@@ -467,4 +491,111 @@ li {
 }
 #typing-text.visible {
   opacity: 1;
+}
+/* Media Query for Phone Screens (max-width: 600px) */
+@media screen and (max-width: 600px) {
+    body {
+        font-size: 14px; /* Slightly smaller base font */
+    }
+
+    .container {
+        width: 88%; /* Take up more of the screen width */
+        margin-top: 20px; /* Less top margin */
+        top: 1.5%; /* Adjust top position */
+        padding: 15px; /* Less padding */
+    }
+
+    input {
+      width: 95%;
+        font-size: 14px;
+        padding: 8px 12px;
+        margin: 8px 0;
+    }
+
+    .tabs {
+        flex-direction: column; /* Stack tabs vertically */
+        align-items: stretch; /* Make tabs full width */
+    }
+
+    .tab-button {
+        font-size: 14px;
+        padding: 8px 12px;
+        margin: 3px 0; /* Less vertical margin */
+        border-radius: 0; /* Full width tabs look better without rounded corners */
+    }
+
+    .add-task-btn,
+    .clear-tasks-btn {
+        font-size: 12px;
+        padding: 8px 15px;
+        margin-left: 0; /* Remove left margin */
+        margin-top: 8px;
+        width: 100%; /* Make buttons full width */
+    }
+
+    .task-item {
+        font-size: 14px;
+        padding: 8px;
+        margin: 3px 0;
+    }
+
+    .music-player {
+        position: relative; /* Adjust positioning context */
+        flex-direction: column; /* Stack controls vertically */
+        align-items: center;
+        bottom: auto; /* Reset bottom positioning */
+        margin: 20px auto; /* Center with adjusted margin */
+        padding: 15px;
+        max-width: 90%; /* Take up more width */
+        gap: 8px; /* Adjust gap between items */
+        font-size: 0.8rem; /* Reduce overall font size within the player */
+    }
+
+    #music-player h2 {
+        font-size: 1.2rem; /* Smaller heading */
+        margin-bottom: 10px;
+    }
+
+    #music-player button {
+        font-size: 1.5rem; /* Smaller button icons */
+        margin: 0 6px;
+    }
+
+    #progress-container {
+        height: 6px; /* Thinner progress bar */
+        margin: 10px 0;
+    }
+
+    #song-selector {
+        font-size: 0.9rem; /* Smaller font in selector */
+        padding: 6px;
+        margin-bottom: 10px;
+    }
+
+    #time-display {
+        font-size: 0.7rem; /* Smaller time display */
+        margin-top: 3px;
+    }
+
+    .video-container {
+        display: none; /* Hide the video container */
+    }
+
+    #mute-btn {
+        display: none; /* Hide the mute button as well */
+    }
+
+    #animated-title {
+      display: none;
+        font-size: 1.5rem; /* Smaller title */
+        top: 5%; /* Adjust title position */
+    }
+
+    .blinking-cursor {
+        font-size: 1.8rem; /* Smaller cursor */
+    }
+
+    .footer {
+        display: none;
+    }
 }
