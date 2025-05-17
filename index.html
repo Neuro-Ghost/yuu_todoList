@@ -13,19 +13,44 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Quicksand:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMmCk1H9b4yD4W4/sYh7RSoS7T7A4to/w9fI5R" crossorigin="anonymous">
-
     <title>Yuu Got This</title>
+<style>
+    #loading-overlay {  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: none; /* Initially hidden */
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+.loader {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.loader img {
+  width: 100%;
+  height: 100%;
+}
+
+</style>
 </head>
 <body>
- 
+<div id="loading-overlay">
+  <div class="loader"><img src="loading.gif" alt="Loading..."></div>
+</div>
 
     <div id="animated-title">
         <span id="typing-text"></span><span class="blinking-cursor">|</span>
     </div>
 
-
     <div class="container">
-
         <div class="tabs">
             <button class="tab-button" id="monday-btn" data-day="monday">Monday</button>
             <button class="tab-button" id="tuesday-btn" data-day="tuesday">Tuesday</button>
@@ -64,23 +89,20 @@
             <input type="text" id="friday-task-input" placeholder="eende lyum...">
             <button class="add-task-btn" data-day="friday">Add Task</button>
         </div>
-            <div id="music-player">
-             <h2 id="now-playing"><span id="current-song">None</span></h2>
-             <div id="progress-container">
-                 <div id="progress-bar"></div>
-             </div>
-             <select id="song-selector">
-                 <option value="">Select a song</option>
-             </select>
-             <button id="back-btn"><i class="fa-solid fa-backward-step"></i></button>
-             <button id="play-pause-btn"><i class="fas fa-play"></i></button>
-             <button id="next-btn"><i class="fa-solid fa-forward-step"></i></button>
-             <button id="loop-btn"><i class="fas fa-redo"></i></button>
-             <div id="time-display">0:00 / 0:00</div>
-         </div>
-         <audio id="audio" preload="auto"></audio>
-
-    </div>
+        <div id="music-player">
+            <h2 id="now-playing"><span id="current-song">None</span></h2>
+            <div id="progress-container">
+                <div id="progress-bar"></div>
+            </div>
+            <select id="song-selector">
+                <option value="">Select a song</option>
+            </select>
+            <button id="back-btn"><i class="fa-solid fa-backward-step"></i></button>
+            <button id="play-pause-btn"><i class="fas fa-play"></i></button>
+            <button id="next-btn"><i class="fa-solid fa-forward-step"></i></button>
+            <button id="loop-btn"><i class="fas fa-redo"></i></button>
+            <div id="time-display">0:00 / 0:00</div>
+        </div>
     </div>
 
     <div class="footer">
@@ -94,11 +116,22 @@
         <button id="mute-btn" data-muted="false">
             <i class="fa fa-volume-up"></i> </button>
     </div>
-    <script type="module" src="firebase.js"></script> 
-      <script type="module" src="script.js"></script>
+    <script type="module" src="firebase.js"></script>
+    <script type="module" src="script.js"></script>
+    <script>
+  // Show loading overlay if redirected from home.html after success
+  if (sessionStorage.getItem('showLoading') === 'true') {
+    const overlay = document.getElementById('loading-overlay');
+    overlay.style.display = 'flex';
+  }
 
-
-
+  // When the whole page is loaded, hide the overlay and clear the flag
+  window.onload = () => {
+    const overlay = document.getElementById('loading-overlay');
+    if (overlay) overlay.style.display = 'none';
+    sessionStorage.removeItem('showLoading');
+  };
+</script>
 
 </body>
 </html>

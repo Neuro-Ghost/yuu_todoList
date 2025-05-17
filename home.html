@@ -71,9 +71,35 @@
       transform: translate(-50%, -50%);
       object-fit: cover;
     }
+    #loading-overlay {  /* Styles for the loading overlay */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.8);
+      display: none; /* Initially hide the loading overlay */
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+    .loader {  /* Styles for the loading indicator */
+      width: 100px;
+      height: 100px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .loader img {
+      width: 100%;
+      height: 100%;
+    }
   </style>
 </head>
 <body>
+  <div id="loading-overlay">
+    <div class="loader"><img src="loading.gif" alt="Loading..."></div>
+  </div>
   <div class="home-container">
     <div class="prompt-container">
       <h1>Baby...?</h1>
@@ -89,27 +115,58 @@
     </video>
   </div>
 
-  <!-- Firebase App + Auth -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-app.js";
     import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/10.10.0/firebase-auth.js";
 
-  const firebaseConfig = {
-  apiKey: "AIzaSyD5TC0pbWHZnuvrEY0UxQNxy3fuKAQsm70",
-  authDomain: "yuugotthis.firebaseapp.com",
-  projectId: "yuugotthis",
-  storageBucket: "yuugotthis.firebasestorage.app",
-  messagingSenderId: "163407586342",
-  appId: "1:163407586342:web:0ddc75b68ffb838a9b32e7",
-  measurementId: "G-91YXNGQ4MM"
-};
+    const firebaseConfig = {
+      apiKey: "AIzaSyD5TC0pbWHZnuvrEY0UxQNxy3fuKAQsm70",
+      authDomain: "yuugotthis.firebaseapp.com",
+      projectId: "yuugotthis",
+      storageBucket: "yuugotthis.firebasestorage.app",
+      messagingSenderId: "163407586342",
+      appId: "1:163407586342:web:0ddc75b68ffb838a9b32e7",
+      measurementId: "G-91YXNGQ4MM"
+    };
 
     const app = initializeApp(firebaseConfig);
     const auth = getAuth(app);
 
+    // Function to show the loading overlay
+    function showLoadingOverlay() {
+      let overlay = document.getElementById('loading-overlay');
+      if (!overlay) {
+        overlay = document.createElement('div');
+        overlay.id = 'loading-overlay';
+        overlay.style.position = 'fixed';
+        overlay.style.top = '0';
+        overlay.style.left = '0';
+        overlay.style.width = '100%';
+        overlay.style.height = '100%';
+        overlay.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+        overlay.style.display = 'flex';
+        overlay.style.justifyContent = 'center';
+        overlay.style.alignItems = 'center';
+        overlay.style.zIndex = '10000';
+        overlay.innerHTML = '<div class="loader"><img src="loading.gif" alt="Loading..."></div>';
+        document.body.appendChild(overlay);
+      } else {
+        overlay.style.display = 'flex';
+      }
+    }
+
+    // Function to hide the loading overlay
+    function hideLoadingOverlay() {
+      const overlay = document.getElementById('loading-overlay');
+      if (overlay) {
+        overlay.style.display = 'none';
+      }
+    }
+
     window.checkSecret = async function () {
       const messageInput = document.getElementById('secretMessage');
       const secret = messageInput.value.trim();
+      // Removed showLoadingOverlay() here to only show loader after success
 
       try {
         const response = await fetch('/api/verify-secret', {
@@ -121,19 +178,25 @@
         const data = await response.json();
 
         if (data.success) {
-          // Step 1: Log in to Firebase anonymously
+          // Show loading overlay on next page via sessionStorage flag
+          sessionStorage.setItem('showLoading', 'true');
+
+          // Sign in anonymously before redirecting
           const result = await signInAnonymously(auth);
           console.log("Logged in anonymously. UID:", result.user.uid);
 
-          // Step 2: Redirect
+          // Redirect to the target URL
           window.location.href = data.redirectUrl;
+
         } else {
           alert(data.message);
           messageInput.value = "";
+          // No loader to hide here since we didn't show it yet
         }
       } catch (error) {
         console.error('Error verifying secret or signing in:', error);
         alert('An error occurred while verifying the secret.');
+        // No loader to hide here since we didn't show it yet
       }
     }
   </script>
