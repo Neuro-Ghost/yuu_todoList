@@ -162,6 +162,27 @@
         overlay.style.display = 'none';
       }
     }
+    window.addEventListener("load", () => {
+  const loader = document.querySelector(".loader");
+  const minLoadTime = 3000; // 3 seconds
+
+  const loadStart = performance.now();
+
+  function hideLoader() {
+    const elapsed = performance.now() - loadStart;
+    const delay = Math.max(0, minLoadTime - elapsed);
+
+    setTimeout(() => {
+      loader.style.opacity = "0";
+      setTimeout(() => {
+        loader.style.display = "none";
+      }, 500); // fade-out duration
+    }, delay);
+  }
+
+  hideLoader();
+});
+
 
     window.checkSecret = async function () {
       const messageInput = document.getElementById('secretMessage');
