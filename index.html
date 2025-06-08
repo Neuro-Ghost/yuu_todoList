@@ -27,17 +27,33 @@
   align-items: center;
   z-index: 10000;
 }
-    .background-video {
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+/* Prevent scroll on body and html */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Disables both horizontal and vertical scrolling */
+  height: 100%;
+  width: 100%;
+}
+
+/* Container fills the entire viewport */
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  z-index: -1; /* Keeps the video in the background */
+}
+
+/* Video fills the container without overflow */
+.background-video {
+  width: 100vw;
+  height: 100vh;
   object-fit: cover;
 }
+
 .loader {
   width: 100px;
   height: 100px;
