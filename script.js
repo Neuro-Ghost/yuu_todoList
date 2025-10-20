@@ -368,14 +368,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // Motivational messages
 const messages = [
-    "I know you can do it, my strong petite nerdy loutre!",
-     "You're my adorable mess, snorts, burps, nerdy rants and all.",
-"Babe?",
-"Baby.....",
-"Babyyyyyyy....",
-"......",
-"Wrong name...😏",
-"Nothing just like that.",
+   "One day...",
+    "We'll meet."
 ];
 
 let messageIndex = 0;
@@ -423,3 +417,4 @@ window.onload = () => {
     if (overlay) overlay.style.display = 'none';
     sessionStorage.removeItem('showLoading');
 };
+
