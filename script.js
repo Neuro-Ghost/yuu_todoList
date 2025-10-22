@@ -410,6 +410,57 @@ window.onload = () => {
 };
 
 
+// ---------------- bg-audio mute/play toggle (safe, simple) ----------------
+document.addEventListener('DOMContentLoaded', () => {
+  const STORAGE_KEY = 'bgSoundOn';
+  const muteBtn = document.getElementById('mute-btn');
+  const bgAudio = document.getElementById('bg-audio');
+
+  if (!muteBtn || !bgAudio) return;
+
+  // Set sensible default volume (0.0 - 1.0)
+  bgAudio.volume = 0.25;
+
+  const setBtnUI = (on) => {
+    muteBtn.classList.toggle('on', on);
+    muteBtn.setAttribute('aria-pressed', on ? 'true' : 'false');
+    muteBtn.innerHTML = on ? '<i class="fas fa-volume-up"></i>' : '<i class="fas fa-volume-mute"></i>';
+  };
+
+  // Restore saved state without forcing playback
+  const wasOn = localStorage.getItem(STORAGE_KEY) === 'true';
+  setBtnUI(wasOn);
+
+  // If saved as on, try to play (will only succeed if browser already unlocked audio)
+  if (wasOn) {
+    bgAudio.play().catch(() => {
+      // Play may be blocked until a user gesture; we'll let the click handler handle it.
+    });
+  }
+
+  // Toggle handler - user click ensures playback permission
+  muteBtn.addEventListener('click', async () => {
+    try {
+      if (bgAudio.paused) {
+        await bgAudio.play(); // user gesture -> should be allowed
+        setBtnUI(true);
+        localStorage.setItem(STORAGE_KEY, 'true');
+      } else {
+        bgAudio.pause();
+        setBtnUI(false);
+        localStorage.setItem(STORAGE_KEY, 'false');
+      }
+    } catch (err) {
+      console.warn('bg-audio toggle failed:', err);
+      // Fallback: flip UI and storage so it doesn't get out of sync
+      const newState = !(bgAudio && !bgAudio.paused);
+      setBtnUI(newState);
+      localStorage.setItem(STORAGE_KEY, newState ? 'true' : 'false');
+    }
+  });
+});
+
+
 
 
 
