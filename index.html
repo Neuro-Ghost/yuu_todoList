@@ -68,7 +68,7 @@ html, body {
 </style>
 </head>
 <body>
-      <audio id="bg-audio" autoplay loop>
+       <audio id="bg-audio" loop>
   <source src="rain.mp3" type="audio/mpeg">
 </audio>
 <div id="loading-overlay">
@@ -152,12 +152,15 @@ html, body {
             Your browser does not support the video tag.
         </video>
     </div>
+                      <button id="mute-btn" aria-pressed="false" title="Toggle rain"></button>
+
     <script type="module" src="firebase.js"></script>
     <script type="module" src="script.js"></script>
     
 
 </body>
 </html>
+
 
 
 
