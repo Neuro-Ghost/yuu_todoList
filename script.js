@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Video mute functionality
     const backgroundVideo = document.getElementById('background-video');
-      const audio = new Audio('audio.mp3');
+      const audio = new Audio('rain.mp3');
   audio.loop = true; // Optional: keeps playing on loop
 
   const muteBtn = document.getElementById('mute-btn');
@@ -431,6 +431,7 @@ window.onload = () => {
     if (overlay) overlay.style.display = 'none';
     sessionStorage.removeItem('showLoading');
 };
+
 
 
 
