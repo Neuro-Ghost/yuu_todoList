@@ -26,15 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Video mute functionality
     const backgroundVideo = document.getElementById('background-video');
     const muteButton = document.getElementById('mute-btn');
-
-    if (backgroundVideo && muteButton) {
-        muteButton.addEventListener('click', () => {
-            backgroundVideo.muted = !backgroundVideo.muted;
-            const isMuted = backgroundVideo.muted;
-            muteButton.setAttribute('data-muted', isMuted.toString());
-            muteButton.innerHTML = isMuted ? '<i class="fa fa-volume-off"></i>' : '<i class="fa fa-volume-up"></i>';
-        });
-    }
+    
 });
 
 // Add task functionality
@@ -417,4 +409,5 @@ window.onload = () => {
     if (overlay) overlay.style.display = 'none';
     sessionStorage.removeItem('showLoading');
 };
+
 
