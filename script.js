@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const day = this.getAttribute('data-day');
             clearTasks(day);
         });
-    });
+   
 
 
   });
