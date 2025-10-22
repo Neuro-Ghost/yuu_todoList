@@ -25,7 +25,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Video mute functionality
     const backgroundVideo = document.getElementById('background-video');
-    const muteButton = document.getElementById('mute-btn');
+      const audio = new Audio('audio.mp3');
+  audio.loop = true; // Optional: keeps playing on loop
+
+  const muteBtn = document.getElementById('mute-btn');
+  const icon = muteBtn.querySelector('i');
+
+  muteBtn.addEventListener('click', () => {
+    const isMuted = muteBtn.getAttribute('data-muted') === 'true';
+
+    if (isMuted) {
+      // Unmute: play the audio
+      audio.play();
+      muteBtn.setAttribute('data-muted', 'false');
+      icon.classList.remove('fa-volume-mute');
+      icon.classList.add('fa-volume-up');
+    } else {
+      // Mute: pause the audio
+      audio.pause();
+      muteBtn.setAttribute('data-muted', 'true');
+      icon.classList.remove('fa-volume-up');
+      icon.classList.add('fa-volume-mute');
+    }
+  });
     
 });
 
@@ -409,5 +431,6 @@ window.onload = () => {
     if (overlay) overlay.style.display = 'none';
     sessionStorage.removeItem('showLoading');
 };
+
 
 
